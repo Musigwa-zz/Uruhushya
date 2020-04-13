@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import { TextInput as Input, Button, withTheme } from 'react-native-paper';
-import styles from '../shared/styles';
+import styles from '../../styles';
 
 const TextInput = ({ theme, label, onChangeText, value, ...props }) => {
   const secureBtn = label.toLowerCase().includes('password');
@@ -12,7 +12,7 @@ const TextInput = ({ theme, label, onChangeText, value, ...props }) => {
       <Input
         style={[styles.input]}
         label={label}
-        mode="flat"
+        mode="outlined"
         onChangeText={onChangeText}
         value={value}
         secureTextEntry={hidden}

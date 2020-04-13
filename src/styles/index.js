@@ -30,7 +30,6 @@ export const paragraph = {
 export const mediumText = {
   textAlign: 'center',
   fontWeight: '600',
-  lineHeight: 17,
   fontSize: 14,
 };
 
@@ -47,8 +46,11 @@ export default StyleSheet.create({
   },
   input: {
     height: 50,
+    borderRadius: 5,
+    borderColor: 'gray',
+    borderWidth: 1,
     backgroundColor: 'white',
-    paddingHorizontal: 0,
+    paddingHorizontal: 10,
   },
   title: {
     lineHeight: 24,
@@ -101,10 +103,8 @@ export default StyleSheet.create({
     alignItems: 'flex-start',
   },
   centerTitle: {
-    lineHeight: 21,
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: 'bold',
-    textTransform: 'capitalize',
   },
   centerSubtitle: {
     ...paragraph,

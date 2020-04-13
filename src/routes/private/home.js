@@ -1,24 +1,28 @@
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export class Home extends Component {
-  static propTypes = {
-    prop: PropTypes,
-  };
+import { SAVE_PROFILE, PASS_REQUEST } from '../../constants/routeNames';
+import { withTheme } from 'react-native-paper';
+import SaveProfile from '../../screens/SaveProfile';
+import PassRequest from '../../screens/PassRequest';
 
-  render() {
-    return (
-      <View>
-        <Text>Home screen</Text>
-      </View>
-    );
-  }
-}
+const Stack = createStackNavigator();
 
-const mapStateToProps = (state) => ({});
+const HomeRoute = ({ theme }) => {
+  return (
+    <Stack.Navigator initialRouteName={SAVE_PROFILE}>
+      <Stack.Screen
+        name={SAVE_PROFILE}
+        component={SaveProfile}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={PASS_REQUEST}
+        component={PassRequest}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+};
 
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default withTheme(HomeRoute);
