@@ -3,20 +3,20 @@ import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { Text, Title, withTheme, TextInput, Button } from 'react-native-paper';
 
-import inputs from '../constants/inputProps';
-import styles from '../styles';
-import Icon from '../components/Icons';
+import inputs from '../../constants/inputProps';
+import styles from '../../styles';
+import Icon from '../../components/Icons';
 import {
   getProvinces,
   getDistricts,
   getSectors,
-} from '../redux/actions/fetchLocations';
-import { registerUser } from '../redux/actions/currentUser';
+} from '../../redux/actions/fetchLocations';
+import { registerUser } from '../../redux/actions/currentUser';
 
-import Select from '../components/Inputs/Select';
-import { PASS_REQUEST } from '../constants/routeNames';
+import Select from '../../components/Inputs/Select';
+import { PASS_REQUEST, APP } from '../../constants/routeNames';
 
-class SaveProfile extends Component {
+class SignUp extends Component {
   state = {
     userInfo: {
       province: {},
@@ -74,7 +74,7 @@ class SaveProfile extends Component {
     const { userInfo } = this.state;
     const { submitUser, navigation } = this.props;
     submitUser(userInfo);
-    navigation.navigate(PASS_REQUEST);
+    navigation.navigate(APP);
   };
 
   render() {
@@ -98,6 +98,7 @@ class SaveProfile extends Component {
           name="adduser"
           type="ant-design"
           size={60}
+          color={colors.primary}
           style={{ marginBottom: 20 }}
         />
         <Title
@@ -105,6 +106,7 @@ class SaveProfile extends Component {
             fontWeight: 'bold',
             textTransform: 'capitalize',
             marginBottom: 5,
+            color: colors.primary,
           }}>
           Reka twuzuze imyirondoro yawe!
         </Title>
@@ -162,6 +164,7 @@ class SaveProfile extends Component {
           mode="contained"
           loading={loading}
           style={{ marginTop: 30 }}
+          labelStyle={{ color: 'white', fontWeight: 'bold' }}
           onPress={this.onSubmit}>
           emeza umwirondoro
         </Button>
@@ -179,7 +182,4 @@ const mapDispatchToProps = {
   submitUser: registerUser,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(withTheme(SaveProfile));
+export default connect(mapStateToProps, mapDispatchToProps)(withTheme(SignUp));

@@ -15,6 +15,7 @@ export const ONBOARDING = 'ONBOARDING';
  */
 export const LOGIN = 'LOGIN';
 export const VERIFICATION = 'VERIFICATION';
+export const SIGN_UP = 'SIGN_UP';
 
 /**
  * @description Profile routes

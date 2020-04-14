@@ -4,31 +4,24 @@ import {
   SAVE_DISTRICTS,
   SAVE_SECTORS,
 } from './types';
-
-const request = async (endpoint = '', service = 'location') => {
-  const baseUrl = service === 'location' ? 'http://197.243.52.214/api' : '';
-  return await fetch(`${baseUrl}/${endpoint}`).then(async (res) => ({
-    status: res.status,
-    body: await res.json(),
-  }));
-};
+import Http from '../../helpers/http';
 
 export const getProvinces = () => async (dispatch) => {
   try {
     dispatch({ type: IS_FETCHING });
-    const data = await request('provinces');
+    const data = await Http.get('provinces');
     if (data.status === 200) {
       dispatch({ type: SAVE_PROVINCES, payload: data.body });
     }
   } catch (error) {
-    console.log('this is an error');
+    console.log('this is an error', error);
   }
 };
 
 export const getDistricts = (provinceId) => async (dispatch) => {
   try {
     dispatch({ type: IS_FETCHING });
-    const data = await request(`provinces/${provinceId}`);
+    const data = await Http.get(`provinces/${provinceId}`);
     if (data.status === 200) {
       dispatch({
         type: SAVE_DISTRICTS,
@@ -36,14 +29,14 @@ export const getDistricts = (provinceId) => async (dispatch) => {
       });
     }
   } catch (error) {
-    console.log('this is an error');
+    console.log('this is an error', error);
   }
 };
 
 export const getSectors = (districtId) => async (dispatch) => {
   try {
     dispatch({ type: IS_FETCHING });
-    const data = await request(`districts/${districtId}`);
+    const data = await Http.get(`districts/${districtId}`);
     if (data.status === 200) {
       dispatch({
         type: SAVE_SECTORS,
@@ -51,6 +44,6 @@ export const getSectors = (districtId) => async (dispatch) => {
       });
     }
   } catch (error) {
-    console.log('this is an error');
+    console.log('this is an error', error);
   }
 };

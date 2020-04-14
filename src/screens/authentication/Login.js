@@ -3,17 +3,27 @@ import { View, Dimensions, TextInput as Input } from 'react-native';
 import { connect } from 'react-redux';
 import { withTheme, Text, Card } from 'react-native-paper';
 
-import { VERIFICATION } from '../../constants/routeNames';
+import { SIGN_UP, APP } from '../../constants/routeNames';
 import styles, { mediumText } from '../../styles';
 import inputs from '../../constants/inputProps';
 import Confirm from '../../components/Buttons/Confirm';
+import { checkUser } from '../../redux/actions/currentUser';
 
 const { width } = Dimensions.get('screen');
 
-const Login = ({ theme, navigation }) => {
+const Login = ({ theme, navigation, userData, loginUser }) => {
   const { colors } = theme;
+  const { user } = userData;
   const [phoneNumber, setPhoneNumber] = useState();
+  const [hasLogged, setHasLogged] = useState(false);
 
+  if (hasLogged && userData.isFetching === false) {
+    if (user.registered) {
+      navigation.navigate(APP);
+    } else {
+      navigation.navigate(SIGN_UP);
+    }
+  }
   return (
     <View style={{ flex: 1 }}>
       <View
@@ -53,10 +63,14 @@ const Login = ({ theme, navigation }) => {
           />
           <Confirm
             text="Emeza"
-            loading={false}
+            loading={hasLogged}
+            disabled={hasLogged}
             labelStyle={styles.confirmButton}
             contentStyle={{ height: 45 }}
-            onPress={() => navigation.navigate(VERIFICATION)}
+            onPress={() => {
+              setHasLogged(true);
+              loginUser(phoneNumber);
+            }}
           />
         </Card>
       </View>
@@ -79,8 +93,13 @@ const Login = ({ theme, navigation }) => {
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = ({ userData, locations }) => ({
+  userData,
+  locations,
+});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  loginUser: checkUser,
+};
 
 export default withTheme(connect(mapStateToProps, mapDispatchToProps)(Login));

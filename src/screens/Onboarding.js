@@ -75,7 +75,7 @@ const Onboarding = ({ navigation, theme }) => {
       titleStyles={styles.title}
       subTitleStyles={{ ...styles.subtitle, color: colors.disabled }}
       onDone={() => navigation.navigate(LOGIN)}
-      bottomBarColor={'rgba(38, 176, 86,0.4)'}
+      bottomBarColor={colors.primaryLight}
       bottomBarHighlight={false}
     />
   );
