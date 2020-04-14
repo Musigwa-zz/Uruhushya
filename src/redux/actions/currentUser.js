@@ -5,7 +5,7 @@ import {
   FETCHING_FAILED,
 } from './types';
 import Http from '../../helpers/http';
-import store from '../store';
+import { store } from '../store';
 
 export const checkUser = (phone) => async (dispatch) => {
   try {

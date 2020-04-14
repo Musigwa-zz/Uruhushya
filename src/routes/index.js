@@ -5,7 +5,7 @@ import AuthRoute from './public';
 
 import Home from './private/home';
 import { APP, AUTH } from '../constants/routeNames';
-import store from '../redux/store';
+import { store } from '../redux/store';
 
 const Stack = createStackNavigator();
 

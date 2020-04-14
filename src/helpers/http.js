@@ -1,4 +1,4 @@
-import store from '../redux/store';
+import { store } from '../redux/store';
 
 const baseUrl = 'http://197.243.52.214/api';
 const { user } = store.getState().userData;
