@@ -1,5 +1,7 @@
-const baseUrl = 'http://197.243.52.214/api';
+import store from '../redux/store';
 
+const baseUrl = 'http://197.243.52.214/api';
+const { user } = store.getState().userData;
 export default class Http {
   static async fetch(url, configs = {}) {
     if (configs.body) {
@@ -11,6 +13,7 @@ export default class Http {
       cache: 'no-cache',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${user.token}`,
         ...configs.headers,
       },
       ...configs,

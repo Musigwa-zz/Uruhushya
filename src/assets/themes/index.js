@@ -10,7 +10,7 @@ export const genColor = (opacity = 1) => ({
   primaryDark: `rgba(0, 46, 128, ${opacity})`,
   accentDark: `rgba(204, 204, 204, ${opacity})`,
   error: `rgba(186, 0, 13, ${opacity})`,
-  secondaryBorder: `rgba(241, 67, 54, ${opacity})`,
+  secondary: `rgba(255, 255, 255, ${opacity})`,
   darkText: `rgba(29, 57, 77,${opacity})`,
   darkBlue: '#1D394D',
   white: '#FFFFFF',

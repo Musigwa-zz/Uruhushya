@@ -8,7 +8,7 @@ import store from './redux/store';
 import AppContainer from './routes';
 import themes from './assets/themes';
 
-YellowBox.ignoreWarnings(['Require cycle:']);
+YellowBox.ignoreWarnings(['Require cycle:', 'Animated:']);
 
 export default () => (
   <Provider store={store}>

@@ -14,7 +14,7 @@ import {
 import { registerUser } from '../../redux/actions/currentUser';
 
 import Select from '../../components/Inputs/Select';
-import { PASS_REQUEST, APP } from '../../constants/routeNames';
+import { APP } from '../../constants/routeNames';
 
 class SignUp extends Component {
   state = {
@@ -33,10 +33,11 @@ class SignUp extends Component {
 
   confirmProvince = async (provinceId) => {
     const { fetchDistricts, locations } = this.props;
+    const { userInfo } = this.state;
     const { provinces = [] } = locations;
     this.setState({
       userInfo: {
-        ...this.userInfo,
+        ...userInfo,
         province: provinces.find((p) => p.id === provinceId),
       },
     });
@@ -45,10 +46,11 @@ class SignUp extends Component {
 
   confirmDistrict = async (districtId) => {
     const { fetchSectors, locations } = this.props;
+    const { userInfo } = this.state;
     const { districts = [] } = locations;
     this.setState({
       userInfo: {
-        ...this.userInfo,
+        ...userInfo,
         district: districts.find((d) => d.id === districtId),
       },
     });
@@ -57,32 +59,36 @@ class SignUp extends Component {
 
   confirmSector = async (sectorId) => {
     const { locations } = this.props;
+    const { userInfo } = this.state;
     const { sectors = [] } = locations;
     this.setState({
       userInfo: {
-        ...this.userInfo,
+        ...userInfo,
         sector: sectors.find((s) => s.id === sectorId),
       },
     });
   };
 
   onChangeText = (target, value) => {
-    this.setState({ userInfo: { ...this.userInfo, [target]: value } });
+    const { userInfo } = this.state;
+    this.setState({ userInfo: { ...userInfo, [target]: value } });
   };
 
   onSubmit = () => {
     const { userInfo } = this.state;
-    const { submitUser, navigation } = this.props;
+    const { submitUser } = this.props;
     submitUser(userInfo);
-    navigation.navigate(APP);
   };
 
   render() {
-    const { theme, locations } = this.props;
+    const { theme, locations, userData, navigation } = this.props;
+    const { user, isFetching } = userData;
     let { provinces = [], districts = [], sectors = [] } = locations;
     const { colors } = theme;
-    const { loading, userInfo } = this.state;
-    console.log('these are user data:', userInfo);
+    const { userInfo } = this.state;
+    if (user.registered === true) {
+      navigation.navigate(APP);
+    }
     if (provinces.length) {
       provinces = provinces.map((p) => ({ ...p, name: p.izina }));
     }
@@ -119,16 +125,23 @@ class SignUp extends Component {
           Gutanga umwirondoro wuzuye bizagufasha gusaba no kubona uruhushya
           rw'ingendo mu buryo bwihuse
         </Text>
-        {inputs.map((input, k) => (
-          <TextInput
-            key={Number(k)}
-            {...input}
-            mode="outlined"
-            style={{ width: '100%', height: 45, marginTop: k === 0 ? 20 : 10 }}
-            selectionColor={colors.primary}
-            onChangeText={(text) => this.onChangeText(input.placeholder, text)}
-          />
-        ))}
+        {inputs.map((input, k) => {
+          return (
+            <TextInput
+              key={Number(k)}
+              {...input}
+              defaultValue={user[input.id]}
+              mode="outlined"
+              style={{
+                width: '100%',
+                height: 45,
+                marginTop: k === 0 ? 20 : 10,
+              }}
+              selectionColor={colors.primary}
+              onChangeText={(text) => this.onChangeText(input.id, text)}
+            />
+          );
+        })}
 
         {provinces.length ? (
           <Select
@@ -162,7 +175,8 @@ class SignUp extends Component {
         ) : null}
         <Button
           mode="contained"
-          loading={loading}
+          loading={isFetching}
+          disabled={isFetching}
           style={{ marginTop: 30 }}
           labelStyle={{ color: 'white', fontWeight: 'bold' }}
           onPress={this.onSubmit}>
@@ -173,7 +187,7 @@ class SignUp extends Component {
   }
 }
 
-const mapStateToProps = ({ locations }) => ({ locations });
+const mapStateToProps = ({ locations, userData }) => ({ locations, userData });
 
 const mapDispatchToProps = {
   fetchProvinces: getProvinces,

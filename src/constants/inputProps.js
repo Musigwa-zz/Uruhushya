@@ -1,7 +1,7 @@
 export default [
   {
     label: 'Amazina yombi',
-    placeholder: 'fullName',
+    id: 'name',
     textContentType: 'name',
     autoCapitalize: 'words',
     autoCompleteType: 'name',
@@ -9,13 +9,13 @@ export default [
   },
   {
     label: 'Indangamuntu/Passport',
-    placeholder: 'identity',
+    id: 'nid',
     autoCompleteType: 'cc-number',
     autoCorrect: false,
   },
   {
     label: 'Nomero ya telephone',
-    placeholder: 'telephone',
+    id: 'phone',
     textContentType: 'telephoneNumber',
     autoCapitalize: 'none',
     autoCompleteType: 'tel',

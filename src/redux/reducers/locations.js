@@ -1,8 +1,9 @@
 import {
-  IS_FETCHING,
+  LOCATION_FETCHING,
   SAVE_PROVINCES,
   SAVE_DISTRICTS,
   SAVE_SECTORS,
+  FETCHING_FAILED,
 } from '../actions/types';
 
 const initialState = {
@@ -14,14 +15,16 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case IS_FETCHING:
+    case LOCATION_FETCHING:
       return { ...state, isFetching: true };
+    case FETCHING_FAILED:
+      return { ...state, isFetching: false };
     case SAVE_PROVINCES:
-      return { ...state, isFetching: false, provinces: payload };
+      return { ...state, provinces: payload, isFetching: false };
     case SAVE_DISTRICTS:
-      return { ...state, isFetching: false, districts: payload };
+      return { ...state, districts: payload, isFetching: false };
     case SAVE_SECTORS:
-      return { ...state, isFetching: false, sectors: payload };
+      return { ...state, sectors: payload, isFetching: false };
     default:
       return state;
   }
