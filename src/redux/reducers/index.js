@@ -1,4 +1,4 @@
 import { combineReducers } from 'redux';
-import fake from './fake';
+import locations from './locations';
 
-export default combineReducers({ fake });
+export default combineReducers({ locations });

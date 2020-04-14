@@ -6,7 +6,7 @@ const { width, height } = Dimensions.get('screen');
 export const genColor = (opacity = 1) => ({
   primary: `rgba(34, 86, 176, ${opacity})`,
   accent: `rgba(255, 255, 255, ${opacity})`,
-  text: `rgba(29, 57, 77, ${opacity})`,
+  text: `rgba(0, 0, 0, ${opacity})`,
   primaryDark: `rgba(0, 46, 128, ${opacity})`,
   accentDark: `rgba(204, 204, 204, ${opacity})`,
   error: `rgba(186, 0, 13, ${opacity})`,
@@ -40,7 +40,7 @@ export default {
     accent: genColor().accent,
     background: genColor().accent,
     surface: genColor().accent,
-    disabled: genColor(0.2).text,
+    disabled: genColor(0.5).text,
     border: genColor(0.4).text,
     placeholder: genColor(0.2).text,
     backdrop: genColor().accentDark,

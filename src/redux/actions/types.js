@@ -1,1 +1,4 @@
 export const IS_FETCHING = 'IS_FETCHING';
+export const SAVE_PROVINCES = 'SAVE_PROVINCES';
+export const SAVE_DISTRICTS = 'SAVE_DISTRICTS';
+export const SAVE_SECTORS = 'SAVE_SECTORS';
