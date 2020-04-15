@@ -13,11 +13,11 @@ const initialState = {
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case CACHE_PASS_DATA:
-      return { ...state, request: payload };
+      return { ...state, request: payload, isFetching: false };
     case PASS_FETCHING:
-      return { ...state, request: payload };
+      return { ...state, request: payload, isFetching: false };
     case SEND_REQ_SUCCESS:
-      return { ...state, request: payload };
+      return { ...state, request: payload, isFetching: false };
     case FETCHING_FAILED:
       return { ...state, request: payload, isFetching: false };
     default:

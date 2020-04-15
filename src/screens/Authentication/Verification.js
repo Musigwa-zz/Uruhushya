@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, TextInput } from 'react-native';
-import PropTypes from 'prop-types';
+
 import { connect } from 'react-redux';
 import styles from '../../styles';
 import { withTheme, Text } from 'react-native-paper';
