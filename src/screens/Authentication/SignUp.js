@@ -130,7 +130,7 @@ class SignUp extends Component {
             <TextInput
               key={Number(k)}
               {...input}
-              defaultValue={user[input.id]}
+              placeholder={user[input.id]}
               mode="outlined"
               style={{
                 width: '100%',

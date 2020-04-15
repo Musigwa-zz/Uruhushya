@@ -24,3 +24,6 @@ export const USER_FETCHING = 'USER_FETCHING';
 export const CACHE_PASS_DATA = 'CACHE_PASS_DATA';
 export const PASS_FETCHING = 'PASS_FETCHING';
 export const SEND_REQ_SUCCESS = 'SEND_REQ_SUCCESS';
+
+export const GET_REASONS = 'FETCH_REASONS';
+export const GET_TRANS_TYPES = 'GET_TRANS_TYPES';

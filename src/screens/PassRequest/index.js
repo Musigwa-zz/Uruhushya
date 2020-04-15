@@ -14,31 +14,27 @@ import {
 import styles from '../../styles';
 import Select from '../../components/Inputs/Select';
 import location from '../../assets/images/location.png';
-import { cacheRequest } from '../../redux/actions/passRequest';
+import {
+  cacheRequest,
+  getReasons,
+  getTransports,
+} from '../../redux/actions/passRequest';
 import { PASS_FRAME2 } from '../../constants/routeNames';
-
-const reasons = [
-  { id: 1, name: 'Guhaha' },
-  { id: 6, name: 'Serivisi za Banki' },
-  { id: 7, name: 'Farumasi' },
-  { id: 8, name: 'Gushyingura' },
-  { id: 9, name: 'Kwivuza' },
-  { id: 10, name: 'Byihutirwa' },
-  { id: 11, name: 'Akazi' },
-  { id: 12, name: 'Kujya kurangura' },
-];
-
-const transports = ['Imodoka', 'Moto'];
+import moment from 'moment';
 
 class PassRequest extends Component {
   state = {
     reason: null,
-    transportType: transports[0],
+    transportType: null,
     placeName: null,
     plateNumber: null,
   };
 
-  async componentDidMount() {}
+  async componentDidMount() {
+    const { fetchTransports, fetchReasons } = this.props;
+    fetchTransports();
+    fetchReasons();
+  }
 
   onChangeText = (target, value) => {
     this.setState({ [target]: value });
@@ -56,10 +52,12 @@ class PassRequest extends Component {
   };
 
   render() {
-    const { theme, userData, navigation } = this.props;
-    const { user, isFetching } = userData;
+    const { theme, userData, passData } = this.props;
+    const { isFetching } = userData;
+    const { reasons = [], transportTypes = [] } = passData;
     const { transportType, reason } = this.state;
     const { colors } = theme;
+
     return (
       <View
         style={[styles.container, { padding: 30, backgroundColor: 'white' }]}>
@@ -67,7 +65,6 @@ class PassRequest extends Component {
         <Title
           style={{
             fontWeight: 'bold',
-            // textTransform: 'capitalize',
             marginBottom: 5,
             color: colors.primary,
           }}>
@@ -86,11 +83,7 @@ class PassRequest extends Component {
           label={'Aho ugiye'}
           mode="outlined"
           autoCapitalize={'words'}
-          style={{
-            width: '100%',
-            height: 45,
-            marginTop: 10,
-          }}
+          style={{ width: '100%', height: 45, marginTop: 10 }}
           selectionColor={colors.primary}
           onChangeText={(text) => this.onChangeText('placeName', text)}
         />
@@ -112,23 +105,24 @@ class PassRequest extends Component {
             borderRadius: 5,
             borderColor: colors.disabled,
           }}>
-          {transports.map((k, i) => (
-            <View
-              key={Number(i)}
-              style={{
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                flexDirection: 'row',
-              }}>
-              <RadioButton
-                value={i}
-                status={transportType === k && 'checked'}
-                onPress={() => this.setState({ transportType: k })}
-                color={colors.primary}
-              />
-              <Text>{k}</Text>
-            </View>
-          ))}
+          {transportTypes.length &&
+            transportTypes.map((k) => (
+              <View
+                key={Number(k.id)}
+                style={{
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  flexDirection: 'row',
+                }}>
+                <RadioButton
+                  value={k.id}
+                  status={transportType === k.id && 'checked'}
+                  onPress={() => this.setState({ transportType: k.id })}
+                  color={colors.primary}
+                />
+                <Text>{k.name}</Text>
+              </View>
+            ))}
         </View>
         <TextInput
           label={"Pulaki y'ikiyanbiziga"}
@@ -141,14 +135,16 @@ class PassRequest extends Component {
           selectionColor={colors.primary}
           onChangeText={(text) => this.onChangeText('plateNumber', text)}
         />
-        <Select
-          title={"Impamvu y'urugendo" || reason}
-          popupTitle="Hitamo impamvu y'urugendo"
-          style={{ marginTop: 15 }}
-          data={reasons}
-          onSelect={(id) => this.confirmSelect('reason', id)}
-          theme={theme}
-        />
+        {reasons.length && (
+          <Select
+            title={"Impamvu y'urugendo" || reason.name}
+            popupTitle="Hitamo impamvu y'urugendo"
+            style={{ marginTop: 15 }}
+            data={reasons}
+            onSelect={(id) => this.confirmSelect('reason', id)}
+            theme={theme}
+          />
+        )}
         <Button
           mode="contained"
           loading={isFetching}
@@ -163,10 +159,12 @@ class PassRequest extends Component {
   }
 }
 
-const mapStateToProps = ({ userData }) => ({ userData });
+const mapStateToProps = ({ userData, passData }) => ({ userData, passData });
 
 const mapDispatchToProps = {
   cachePass: cacheRequest,
+  fetchReasons: getReasons,
+  fetchTransports: getTransports,
 };
 
 export default connect(

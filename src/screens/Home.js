@@ -27,14 +27,21 @@ const menu = [
 ];
 
 const styles = StyleSheet.create({
-  container: { justifyContent: 'center', alignItems: 'center', flex: 1 },
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    backgroundColor: 'white',
+  },
   title: {
-    width: '100%',
-    textAlign: 'center',
-    lineHeight: 24,
-    fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 30,
+    textAlign: 'center',
+    marginBottom: 25,
+  },
+  description: {
+    fontWeight: 'bold',
+    textAlign: 'center',
+    margin: 10,
   },
   menuWrapper: {
     flexWrap: 'wrap',
@@ -61,34 +68,14 @@ const Home = ({ userData: { user } = {}, theme, navigation }) => {
   const { colors } = theme;
   return (
     <View style={[styles.container]}>
-      <Title
-        style={{
-          fontWeight: 'bold',
-          textAlign: 'center',
-          marginBottom: 25,
-          color: colors.disabled,
-        }}>
+      <Title style={[styles.title, { color: colors.disabled }]}>
         Murakaza neza,
-        <Text
-          style={{
-            fontWeight: 'bold',
-            color: colors.primary,
-          }}>{`\t\t${user.name}`}</Text>
+        <Text style={{ color: colors.primary }}>{`\t\t${user.name}`}</Text>
       </Title>
-      <Text
-        style={{
-          color: colors.disabled,
-          fontWeight: 'bold',
-          textAlign: 'center',
-          margin: 10,
-        }}>
+      <Text style={[styles.description, { color: colors.disabled }]}>
         Kugira ngo utangire gukoresha iri koranabuhanga, wahitamo igikorwa kimwe
         mu byerekanishijwe ibimenyetso bikurikira
       </Text>
-      {/* <Text style={[styles.title, { color: colors.primary }]}>
-        Murakaza neza,
-        <Text style={{ fontWeight: 'bold' }}>{user.name}</Text>
-      </Text> */}
       <View style={styles.menuWrapper}>
         {menu.map((m, i) => (
           <TouchableOpacity

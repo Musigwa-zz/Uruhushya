@@ -154,6 +154,7 @@ class PassRequest extends Component {
             this.setState({ height: event.nativeEvent.contentSize.height });
           }}
           onChangeText={(text) => this.onChangeText('description', text)}
+          blurOnSubmit={true}
         />
         <Button
           mode="contained"
