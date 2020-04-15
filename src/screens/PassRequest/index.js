@@ -20,7 +20,6 @@ import {
   getTransports,
 } from '../../redux/actions/passRequest';
 import { PASS_FRAME2 } from '../../constants/routeNames';
-import moment from 'moment';
 
 class PassRequest extends Component {
   state = {

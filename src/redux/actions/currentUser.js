@@ -6,6 +6,7 @@ import {
 } from './types';
 import Http from '../../helpers/http';
 import { store } from '../store';
+import { DropAlert } from '../../components/Alerts';
 
 export const checkUser = (phone) => async (dispatch) => {
   try {
@@ -18,14 +19,13 @@ export const checkUser = (phone) => async (dispatch) => {
           ? { ...body.data, registered: true }
           : { phone, registered: false },
     });
-    console.log('the body is here:', body);
   } catch (error) {
     dispatch({ type: FETCHING_FAILED });
-    console.log('this is an error', error);
   }
 };
 
 export const registerUser = (data) => async (dispatch) => {
+  let message = 'Kwiyandikisha ntibigenze neza. Ongera ugerageze!';
   try {
     const { userData: { user } = {} } = store.getState();
     dispatch({ type: USER_FETCHING });
@@ -35,17 +35,17 @@ export const registerUser = (data) => async (dispatch) => {
       phone: data.phone || user.phone,
       location: sector.id,
     });
-    console.log('the response:', body);
     if (body.status === true) {
       dispatch({
         type: REGISTER_SUCCESSFUL,
         payload: { registered: true, ...data },
       });
     } else {
+      DropAlert(body.message || message, 'warn');
       dispatch({ type: FETCHING_FAILED });
     }
   } catch (error) {
+    DropAlert(error.message || message, 'error');
     dispatch({ type: FETCHING_FAILED });
-    console.log('this is an error');
   }
 };

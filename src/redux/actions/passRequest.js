@@ -9,13 +9,10 @@ import {
 import Http from '../../helpers/http';
 import { store } from '../store';
 import moment from 'moment';
+import { DropAlert } from '../../components/Alerts';
 
 export const cacheRequest = (data) => async (dispatch) => {
-  try {
-    dispatch({ type: CACHE_PASS_DATA, payload: data });
-  } catch (error) {
-    dispatch({ type: FETCHING_FAILED });
-  }
+  dispatch({ type: CACHE_PASS_DATA, payload: data });
 };
 
 export const submitRequest = ({
@@ -44,22 +41,20 @@ export const submitRequest = ({
     come_date,
     come_time,
   };
-
+  let message = 'Gusaba uruhushya ntibyakozwe neza. Ongera ugerageze!';
   try {
-    dispatch({
-      type: PASS_FETCHING,
-      payload: reqBody,
-    });
-    const { body } = await Http.post('permissions/request', reqBody);
-    if (body.status === true) {
+    dispatch({ type: PASS_FETCHING, payload: reqBody });
+    const { body, status } = await Http.post('permissions/request', reqBody);
+    if (status === 200) {
+      DropAlert(body.message, 'success');
       dispatch({ type: SEND_REQ_SUCCESS, payload: body });
     } else {
+      message = body.message && body.message;
+      DropAlert(message, 'warn');
       dispatch({ type: FETCHING_FAILED });
-      console.log('this is an error');
     }
   } catch (error) {
-    dispatch({ type: FETCHING_FAILED });
-    console.log('this is an error', error);
+    DropAlert(error.message || message, 'error');
   }
 };
 
@@ -74,7 +69,6 @@ export const getReasons = () => async (dispatch) => {
     }
   } catch (error) {
     dispatch({ type: FETCHING_FAILED });
-    console.log('this is an error', error);
   }
 };
 
@@ -86,6 +80,5 @@ export const getTransports = () => async (dispatch) => {
     }
   } catch (error) {
     dispatch({ type: FETCHING_FAILED });
-    console.log('this is an error', error);
   }
 };

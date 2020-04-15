@@ -18,7 +18,6 @@ export const getProvinces = () => async (dispatch) => {
     }
   } catch (error) {
     dispatch({ type: FETCHING_FAILED });
-    console.log('this is an error', error);
   }
 };
 
@@ -36,7 +35,6 @@ export const getDistricts = (provinceId) => async (dispatch) => {
     }
   } catch (error) {
     dispatch({ type: FETCHING_FAILED });
-    console.log('this is an error', error);
   }
 };
 
@@ -54,6 +52,5 @@ export const getSectors = (districtId) => async (dispatch) => {
     }
   } catch (error) {
     dispatch({ type: FETCHING_FAILED });
-    console.log('this is an error', error);
   }
 };
