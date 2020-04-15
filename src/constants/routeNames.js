@@ -27,3 +27,4 @@ export const EDIT_PROFILE = 'EDIT_PROFILE';
  * @description Pass request routes
  */
 export const PASS_REQUEST = 'PASS_REQUEST';
+export const PASS_FRAME2 = 'PASS_FRAME2';

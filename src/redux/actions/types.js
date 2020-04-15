@@ -1,9 +1,8 @@
 /**
  * @description General types
  */
-export const LOCATION_FETCHING = 'LOCATION_FETCHING';
 export const FETCHING_FAILED = 'FETCHING_FAILED';
-export const USER_FETCHING = 'USER_FETCHING';
+export const LOCATION_FETCHING = 'LOCATION_FETCHING';
 
 /**
  * @description Locations
@@ -17,3 +16,11 @@ export const SAVE_SECTORS = 'SAVE_SECTORS';
  */
 export const CURRENT_USER_FETCHED = 'CURRENT_USER_FETCHED';
 export const REGISTER_SUCCESSFUL = 'REGISTER_SUCCESSFUL';
+export const USER_FETCHING = 'USER_FETCHING';
+
+/**
+ * @description Pass Requests
+ */
+export const CACHE_PASS_DATA = 'CACHE_PASS_DATA';
+export const PASS_FETCHING = 'PASS_FETCHING';
+export const SEND_REQ_SUCCESS = 'SEND_REQ_SUCCESS';

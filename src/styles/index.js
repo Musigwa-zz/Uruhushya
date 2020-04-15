@@ -138,4 +138,9 @@ export default StyleSheet.create({
     borderTopWidth: 1,
     borderColor: colors.disabled,
   },
+  avatar: {
+    borderRadius: null,
+    borderWidth: null,
+    backgroundColor: 'transparent',
+  },
 });
