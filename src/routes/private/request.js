@@ -8,7 +8,7 @@ import Frame2 from '../../screens/PassRequest/Frame2';
 
 const Stack = createStackNavigator();
 
-const HomeRoute = ({ theme }) => {
+const RequestRoute = ({ theme }) => {
   return (
     <Stack.Navigator initialRouteName={PASS_REQUEST}>
       <Stack.Screen
@@ -25,4 +25,4 @@ const HomeRoute = ({ theme }) => {
   );
 };
 
-export default withTheme(HomeRoute);
+export default withTheme(RequestRoute);

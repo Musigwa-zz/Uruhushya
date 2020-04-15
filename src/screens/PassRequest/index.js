@@ -137,7 +137,6 @@ class PassRequest extends Component {
           style={{
             width: '100%',
             height: 45,
-            // marginTop: 10,
           }}
           selectionColor={colors.primary}
           onChangeText={(text) => this.onChangeText('plateNumber', text)}
@@ -150,18 +149,6 @@ class PassRequest extends Component {
           onSelect={(id) => this.confirmSelect('reason', id)}
           theme={theme}
         />
-        {/* <TextInput
-          label={"Pulaki y'ikiyanbiziga"}
-          mode="outlined"
-          autoCapitalize={'words'}
-          style={{
-            width: '100%',
-            height: 45,
-            marginTop: 10,
-          }}
-          selectionColor={colors.primary}
-          onChangeText={(text) => this.onChangeText('location', text)}
-        /> */}
         <Button
           mode="contained"
           loading={isFetching}

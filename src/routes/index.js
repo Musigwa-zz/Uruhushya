@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import AuthRoute from './public';
 
-import Home from './private/home';
+import Home from './private';
 import { APP, AUTH } from '../constants/routeNames';
 import { store } from '../redux/store';
 

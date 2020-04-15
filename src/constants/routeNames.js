@@ -28,3 +28,5 @@ export const EDIT_PROFILE = 'EDIT_PROFILE';
  */
 export const PASS_REQUEST = 'PASS_REQUEST';
 export const PASS_FRAME2 = 'PASS_FRAME2';
+export const PASS_REQUEST_ROUTE = 'PASS_REQUEST_ROUTE';
+export const HOME_SCREEN = 'HOME_SCREEN';
