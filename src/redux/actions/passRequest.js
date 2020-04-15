@@ -22,8 +22,8 @@ export const submitRequest = (data) => async (dispatch) => {
     passData: { request } = {},
     userData: { user } = {},
   } = store.getState();
-  const { name, nid, sector } = user;
-  const fromLocation = sector.id;
+  const { name, nid, sector = {}, location } = user;
+  const fromLocation = sector.id || location;
   const reqBody = { ...request, ...data, fromLocation, nid, name };
   try {
     dispatch({ type: PASS_FETCHING, payload: { ...request, ...data } });
