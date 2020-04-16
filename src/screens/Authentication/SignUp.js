@@ -79,8 +79,12 @@ class SignUp extends Component {
 
   onSubmit = () => {
     const { userInfo } = this.state;
-    const { submitUser } = this.props;
+    const { submitUser, userData, navigation } = this.props;
+    const { user, isFetching } = userData;
     submitUser(userInfo);
+    if (isFetching === false && user.registered === true) {
+      navigation.navigate(APP);
+    }
   };
 
   render() {
@@ -91,12 +95,6 @@ class SignUp extends Component {
     const { colors } = theme;
     const { userInfo } = this.state;
 
-    if (defaultPhone) {
-      this.setState({ userInfo: { phone: defaultPhone } });
-    }
-    if (user.registered === true) {
-      navigation.navigate(APP);
-    }
     if (provinces.length) {
       provinces = provinces.map((p) => ({ ...p, name: p.izina }));
     }

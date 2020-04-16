@@ -4,6 +4,7 @@ import {
   REGISTER_SUCCESSFUL,
   FETCHING_FAILED,
   USER_NOT_FOUND,
+  LOGIN_FLAG,
 } from '../actions/types';
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
   user: {
     registered: false,
   },
+  didLogin: false,
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -37,6 +39,10 @@ export default (state = initialState, { type, payload }) => {
         user: { ...state.user, ...payload },
         isFetching: false,
       };
+    case LOGIN_FLAG:
+      return { ...state, didLogin: true };
+    case FETCHING_FAILED:
+      return { ...state, isFetching: false };
     default:
       return state;
   }

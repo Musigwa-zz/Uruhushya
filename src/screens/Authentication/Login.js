@@ -16,21 +16,15 @@ export class Login extends Component {
 
   onSubmit = () => {
     const { phone } = this.state;
-    const { loginUser, userData, navigation } = this.props;
-    const { user, isFetching } = userData;
+    const { loginUser } = this.props;
     loginUser(phone);
-    if (isFetching === false && user.registered === true) {
-      navigation.navigate(APP);
-    } else {
-      navigation.navigate(SIGN_UP, { phone });
-    }
   };
 
   render() {
-    const { theme, userData } = this.props;
+    const { theme, userData, navigation } = this.props;
     const { phone } = this.state;
     const { colors } = theme;
-    const { isFetching } = userData;
+    const { user, isFetching, didLogin } = userData;
     return (
       <View
         style={{
@@ -39,6 +33,11 @@ export class Login extends Component {
           justifyContent: 'center',
           padding: 20,
         }}>
+        {user.registered === true
+          ? navigation.navigate(APP)
+          : didLogin === true
+          ? navigation.navigate(SIGN_UP, { phone })
+          : null}
         <Title
           style={{
             fontWeight: 'bold',
