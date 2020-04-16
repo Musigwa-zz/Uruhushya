@@ -24,7 +24,7 @@ export const submitRequest = ({
     passData: { request } = {},
     userData: { user } = {},
   } = store.getState();
-  const { name, nid, sector = {}, location } = user;
+  const { name, nid_passport, sector = {}, location } = user;
   const fromLocation = sector.id || location;
   const goDate = moment(depDate).format('L');
   const goTime = moment(depDate).format('HH:mm');
@@ -34,7 +34,7 @@ export const submitRequest = ({
     ...request,
     ...data,
     fromLocation,
-    nid,
+    nid: nid_passport,
     name,
     goDate,
     goTime,
@@ -47,7 +47,7 @@ export const submitRequest = ({
     const { body, status } = await Http.post('permissions/request', reqBody);
     if (status === 200) {
       DropAlert(body.message, 'success');
-      dispatch({ type: SEND_REQ_SUCCESS, payload: body });
+      dispatch({ type: SEND_REQ_SUCCESS, payload: {} });
     } else {
       message = body.message && body.message;
       DropAlert(message, 'warn');

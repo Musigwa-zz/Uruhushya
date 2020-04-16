@@ -45,21 +45,23 @@ class PassRequest extends Component {
 
   onChange = (event, selectedDate) => {
     const { mode, currentInputDate } = this.state;
-    if (currentInputDate === 'goDate') {
-      this.setState({
-        goDate: selectedDate,
-        date: selectedDate,
-        show: false,
-      });
-    } else if (currentInputDate === 'come_date') {
-      this.setState({
-        come_date: selectedDate,
-        date: selectedDate,
-        show: false,
-      });
-    }
-    if (mode === 'date') {
-      this.setState({ show: true, mode: 'time' });
+    if (selectedDate !== undefined) {
+      if (currentInputDate === 'goDate') {
+        this.setState({
+          goDate: selectedDate,
+          date: selectedDate,
+          show: false,
+        });
+      } else if (currentInputDate === 'come_date') {
+        this.setState({
+          come_date: selectedDate,
+          date: selectedDate,
+          show: false,
+        });
+      }
+      if (mode === 'date') {
+        this.setState({ show: true, mode: 'time' });
+      }
     }
   };
 
@@ -70,8 +72,10 @@ class PassRequest extends Component {
   render() {
     const { theme, passData } = this.props;
     const { isFetching } = passData;
-    const { show, height, mode, date, goDate, come_date } = this.state;
+    const { goDate, come_date, description } = this.state;
+    const { show, height, mode, date } = this.state;
     const { colors } = theme;
+
     return (
       <View
         style={[styles.container, { padding: 30, backgroundColor: 'white' }]}>
@@ -105,7 +109,7 @@ class PassRequest extends Component {
             }}
             onPress={() => this.showDatePicker('goDate')}>
             <Text style={{ fontWeight: 'bold' }}>
-              {moment(goDate).format('MMMM, Do YYYY - h:mm:ss A')}
+              {moment(goDate).format('LLL')}
             </Text>
           </TouchableOpacity>
         </View>
@@ -130,11 +134,11 @@ class PassRequest extends Component {
             }}
             onPress={() => this.showDatePicker('come_date')}>
             <Text style={{ fontWeight: 'bold' }}>
-              {moment(come_date).format('MMMM, Do YYYY - h:mm:ss A')}
+              {moment(come_date).format('LLL')}
             </Text>
           </TouchableOpacity>
         </View>
-        {show && (
+        {show === true && (
           <DateTimePicker
             testID="dateTimePicker"
             timeZoneOffsetInMinutes={0}
@@ -167,7 +171,7 @@ class PassRequest extends Component {
         <Button
           mode="contained"
           loading={isFetching}
-          disabled={isFetching}
+          disabled={!(goDate && come_date && description)}
           style={{ marginTop: 30 }}
           labelStyle={{ color: 'white', fontWeight: 'bold' }}
           onPress={this.onSubmit}>

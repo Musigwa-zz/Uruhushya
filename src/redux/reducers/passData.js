@@ -20,9 +20,9 @@ export default (state = initialState, { type, payload = {} }) => {
     case CACHE_PASS_DATA:
       return { ...state, request: payload, isFetching: false };
     case PASS_FETCHING:
-      return { ...state, request: payload, isFetching: false };
+      return { ...state, request: payload, isFetching: true };
     case SEND_REQ_SUCCESS:
-      return { ...state, ...payload, isFetching: false };
+      return { ...state, request: payload, isFetching: false };
     case GET_REASONS:
       return { ...state, reasons: payload, isFetching: false };
     case GET_TRANS_TYPES:

@@ -3,7 +3,7 @@ import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { withTheme, Title, Text } from 'react-native-paper';
 import Icon from '../components/Icons';
-import { PASS_REQUEST_ROUTE } from '../constants/routeNames';
+import { PASS_REQUEST, PASS_FRAME2 } from '../constants/routeNames';
 
 const menu = [
   {
@@ -13,9 +13,9 @@ const menu = [
     iconProps: { name: 'user-cog', type: 'font-awesome5' },
   },
   {
-    color: (opacity = 1) => `rgba(9, 179, 239, ${opacity})`,
+    color: (opacity = 1) => `rgba(24, 64, 133, ${opacity})`,
     title: 'Saba uruhushya',
-    route: PASS_REQUEST_ROUTE,
+    route: PASS_REQUEST,
     iconProps: { name: 'send-o', type: 'font-awesome' },
   },
   {
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
 const Home = ({ userData: { user } = {}, theme, navigation }) => {
   const { colors } = theme;
   return (
-    <View style={[styles.container]}>
+    <View style={styles.container}>
       <Title style={[styles.title, { color: colors.disabled }]}>
         Murakaza neza,
         <Text style={{ color: colors.primary }}>{`\t\t${user.name}`}</Text>

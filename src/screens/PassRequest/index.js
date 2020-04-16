@@ -39,10 +39,6 @@ class PassRequest extends Component {
     this.setState({ [target]: value });
   };
 
-  confirmSelect = (target, value) => {
-    this.setState({ [target]: value });
-  };
-
   onSubmit = () => {
     const { placeName, transportType, plateNumber, reason } = this.state;
     const { cachePass, navigation } = this.props;
@@ -54,9 +50,11 @@ class PassRequest extends Component {
     const { theme, userData, passData } = this.props;
     const { isFetching } = userData;
     const { reasons = [], transportTypes = [] } = passData;
-    const { transportType, reason } = this.state;
+    const { transportType, reason, placeName, plateNumber } = this.state;
     const { colors } = theme;
-
+    const enabled = Boolean(
+      transportType && reason && placeName && plateNumber,
+    );
     return (
       <View
         style={[styles.container, { padding: 30, backgroundColor: 'white' }]}>
@@ -79,9 +77,9 @@ class PassRequest extends Component {
           rw'ingendo mu buryo bwihuse
         </Text>
         <TextInput
-          label={'Aho ugiye'}
+          label="Aho ugiye"
           mode="outlined"
-          autoCapitalize={'words'}
+          autoCapitalize="words"
           style={{ width: '100%', height: 45, marginTop: 10 }}
           selectionColor={colors.primary}
           onChangeText={(text) => this.onChangeText('placeName', text)}
@@ -104,7 +102,7 @@ class PassRequest extends Component {
             borderRadius: 5,
             borderColor: colors.disabled,
           }}>
-          {transportTypes.length &&
+          {transportTypes.length !== 0 &&
             transportTypes.map((k) => (
               <View
                 key={Number(k.id)}
@@ -124,30 +122,27 @@ class PassRequest extends Component {
             ))}
         </View>
         <TextInput
-          label={"Pulaki y'ikiyanbiziga"}
+          label="Pulaki y'ikiyanbiziga"
           mode="outlined"
-          autoCapitalize={'words'}
-          style={{
-            width: '100%',
-            height: 45,
-          }}
+          autoCapitalize="words"
+          style={{ width: '100%', height: 45 }}
           selectionColor={colors.primary}
           onChangeText={(text) => this.onChangeText('plateNumber', text)}
         />
-        {reasons.length && (
+        {reasons.length !== 0 && (
           <Select
             title={"Impamvu y'urugendo" || reason.name}
             popupTitle="Hitamo impamvu y'urugendo"
             style={{ marginTop: 15 }}
             data={reasons}
-            onSelect={(id) => this.confirmSelect('reason', id)}
+            onSelect={(id) => this.onChangeText('reason', id)}
             theme={theme}
           />
         )}
         <Button
           mode="contained"
           loading={isFetching}
-          disabled={isFetching}
+          disabled={!enabled}
           style={{ marginTop: 30 }}
           labelStyle={{ color: 'white', fontWeight: 'bold' }}
           onPress={this.onSubmit}>

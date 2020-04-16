@@ -1,10 +1,15 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { HOME_SCREEN, PASS_REQUEST_ROUTE } from '../../constants/routeNames';
+import {
+  HOME_SCREEN,
+  PASS_REQUEST,
+  PASS_FRAME2,
+} from '../../constants/routeNames';
 import { withTheme } from 'react-native-paper';
-import PassRequest from './request';
 import HomeScreen from '../../screens/Home';
+import PassRequest from '../../screens/PassRequest/index';
+import Frame2 from '../../screens/PassRequest/Frame2';
 
 const Stack = createStackNavigator();
 
@@ -18,8 +23,17 @@ const HomeRoute = ({ theme }) => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name={PASS_REQUEST_ROUTE}
+        name={PASS_REQUEST}
         component={PassRequest}
+        options={{
+          title: null,
+          headerStyle: { backgroundColor: colors.primary },
+          headerTintColor: 'white',
+        }}
+      />
+      <Stack.Screen
+        name={PASS_FRAME2}
+        component={Frame2}
         options={{
           title: null,
           headerStyle: { backgroundColor: colors.primary },

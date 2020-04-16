@@ -1,14 +1,14 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import Boarding from 'react-native-onboarding-swiper';
-import { Avatar, withTheme } from 'react-native-paper';
+import { Avatar, withTheme, IconButton, Colors } from 'react-native-paper';
 
 import info from '../assets/images/ask.png';
 import hospital from '../assets/images/hospital.png';
 import work from '../assets/images/work.png';
 import shopping from '../assets/images/shopping.png';
 
-import { LOGIN } from '../constants/routeNames';
+import { AUTH } from '../constants/routeNames';
 
 const styles = StyleSheet.create({
   container: { justifyContent: 'flex-start', marginTop: 40, padding: 10 },
@@ -74,7 +74,7 @@ const Onboarding = ({ navigation, theme }) => {
       containerStyles={styles.container}
       titleStyles={styles.title}
       subTitleStyles={{ ...styles.subtitle, color: colors.disabled }}
-      onDone={() => navigation.navigate(LOGIN)}
+      onDone={() => navigation.navigate(AUTH)}
       bottomBarColor={colors.primaryLight}
       bottomBarHighlight={false}
     />

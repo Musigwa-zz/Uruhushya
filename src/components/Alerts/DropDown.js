@@ -1,5 +1,3 @@
-import { StatusBar } from 'react-native';
-
 let AlertRef;
 export const setAlertRef = (ref) => {
   AlertRef = ref;
@@ -15,6 +13,5 @@ export const setAlertRef = (ref) => {
  * @return {function} The alertWithType method that renders a dropdown
  */
 export const DropAlert = (message, type, title) => {
-  StatusBar.setHidden(true);
   return AlertRef.alertWithType(type, title, message);
 };

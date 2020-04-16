@@ -1,5 +1,5 @@
 import React from 'react';
-import { YellowBox, StatusBar } from 'react-native';
+import { YellowBox } from 'react-native';
 import { Provider } from 'react-redux';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
@@ -21,7 +21,6 @@ export default () => (
           <AppContainer />
         </NavigationContainer>
         <DropdownAlert
-          // renderImage={() => null}
           messageStyle={{
             textAlign: 'center',
             fontSize: 14,
@@ -29,11 +28,9 @@ export default () => (
             color: 'white',
           }}
           renderTitle={() => null}
-          // errorColor={colors.error}
-          // infoColor={colors.primaryLight}
           ref={(ref) => setAlertRef(ref)}
           updateStatusBar={false}
-          onClose={() => StatusBar.setHidden(false)}
+          closeInterval={3000}
         />
       </PaperProvider>
     </Provider>

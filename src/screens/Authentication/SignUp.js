@@ -22,6 +22,9 @@ class SignUp extends Component {
       province: {},
       district: {},
       sector: {},
+      name: null,
+      phone: null,
+      nid: null,
     },
     loading: false,
   };
@@ -86,6 +89,7 @@ class SignUp extends Component {
     let { provinces = [], districts = [], sectors = [] } = locations;
     const { colors } = theme;
     const { userInfo } = this.state;
+
     if (user.registered === true) {
       navigation.navigate(APP);
     }
@@ -97,6 +101,9 @@ class SignUp extends Component {
       district: { name: districtName = 'Akarere utuyemo' } = {},
       sector: { name: sectorName = 'Umurenge utuyemo' } = {},
     } = userInfo;
+    const { name, nid, sector, district, province } = userInfo;
+    const enabled = name && nid && sector.id && district.id && province.id;
+
     return (
       <View
         style={[styles.container, { padding: 30, backgroundColor: 'white' }]}>
@@ -130,7 +137,7 @@ class SignUp extends Component {
             <TextInput
               key={Number(k)}
               {...input}
-              placeholder={user[input.id]}
+              defaultValue={user[input.id]}
               mode="outlined"
               style={{
                 width: '100%',
@@ -143,7 +150,7 @@ class SignUp extends Component {
           );
         })}
 
-        {provinces.length ? (
+        {provinces.length !== 0 && (
           <Select
             title={provinceName}
             popupTitle="Hitamo intara utuyemo"
@@ -152,18 +159,19 @@ class SignUp extends Component {
             onSelect={this.confirmProvince}
             theme={theme}
           />
-        ) : null}
-        {districts.length ? (
-          <Select
-            title={districtName}
-            popupTitle="Hitamo akarere utuyemo"
-            style={{ marginTop: 20 }}
-            data={districts}
-            onSelect={this.confirmDistrict}
-            theme={theme}
-          />
-        ) : null}
-        {sectors.length ? (
+        )}
+        {districts.length !==
+          0(
+            <Select
+              title={districtName}
+              popupTitle="Hitamo akarere utuyemo"
+              style={{ marginTop: 20 }}
+              data={districts}
+              onSelect={this.confirmDistrict}
+              theme={theme}
+            />,
+          )}
+        {sectors.length !== 0 && (
           <Select
             title={sectorName}
             popupTitle="Hitamo umurenge utuyemo"
@@ -172,11 +180,11 @@ class SignUp extends Component {
             onSelect={this.confirmSector}
             theme={theme}
           />
-        ) : null}
+        )}
         <Button
           mode="contained"
           loading={isFetching}
-          disabled={isFetching}
+          disabled={!enabled}
           style={{ marginTop: 30 }}
           labelStyle={{ color: 'white', fontWeight: 'bold' }}
           onPress={this.onSubmit}>

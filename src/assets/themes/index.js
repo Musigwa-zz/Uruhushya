@@ -4,7 +4,7 @@ import { DefaultTheme, configureFonts } from 'react-native-paper';
 const { width, height } = Dimensions.get('screen');
 
 export const genColor = (opacity = 1) => ({
-  primary: `rgba(9, 179, 239, ${opacity})`,
+  primary: `rgba(24, 64, 133, ${opacity})`,
   accent: `rgba(255, 255, 255, ${opacity})`,
   text: `rgba(0, 0, 0, ${opacity})`,
   primaryDark: `rgba(0, 46, 128, ${opacity})`,

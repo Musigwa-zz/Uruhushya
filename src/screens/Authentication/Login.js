@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import { View, Dimensions, TextInput as Input } from 'react-native';
+import { View, TextInput, Image } from 'react-native';
 import { connect } from 'react-redux';
-import { withTheme, Text, Card, TextInput } from 'react-native-paper';
+import { withTheme, Text, Button, Title } from 'react-native-paper';
 
 import { SIGN_UP, APP } from '../../constants/routeNames';
-import styles, { mediumText } from '../../styles';
-import inputs from '../../constants/inputProps';
-import Confirm from '../../components/Buttons/Confirm';
+import styles from '../../styles';
 import { checkUser } from '../../redux/actions/currentUser';
-
-const { width } = Dimensions.get('screen');
+import logo from '../../assets/images/logo.png';
 
 export class Login extends Component {
   state = { phone: null };
@@ -30,67 +27,82 @@ export class Login extends Component {
 
   render() {
     const { theme, userData } = this.props;
+    const { phone } = this.state;
     const { colors } = theme;
     const { isFetching } = userData;
     return (
-      <View style={{ flex: 1 }}>
-        <View
+      <View
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 20,
+        }}>
+        <Title
           style={{
-            backgroundColor: colors.primary,
-            width,
-            height: '50%',
-          }}
-        />
-        <View
-          style={{
-            position: 'absolute',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: 'transparent',
-            width,
-            height: '100%',
-            zIndex: 2,
+            fontWeight: 'bold',
+            fontSize: 30,
+            textAlign: 'center',
+            marginBottom: 30,
+            color: colors.primary,
           }}>
-          <Card
+          Suzuma umwirondoro wawe
+        </Title>
+        <Image
+          style={[
+            styles.avatar,
+            { borderRadius: null, width: 250, height: 250, marginBottom: 30 },
+          ]}
+          source={logo}
+        />
+
+        <View style={{ width: '100%' }}>
+          <Text
             style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: (width * 90) / 100,
-              backgroundColor: 'white',
-              padding: 20,
+              color: colors.primary,
+              fontWeight: 'bold',
+              marginVertical: 10,
             }}>
-            <Text style={styles.title}>Injizamo nomero ya telephone</Text>
-            <TextInput
-              mode="outlined"
-              style={{ marginVertical: 30, width: (width * 80) / 100 }}
-              selectionColor={colors.primary}
-              onChangeText={(text) => this.setState({ phone: text })}
-              {...inputs.find((i) => i.autoCompleteType.includes('tel'))}
-            />
-            <Confirm
-              text="Emeza"
-              loading={isFetching}
-              disabled={isFetching}
-              labelStyle={styles.confirmButton}
-              contentStyle={{ height: 45 }}
-              onPress={this.onSubmit}
-            />
-          </Card>
+            Nomero ya telephone
+          </Text>
+          <TextInput
+            style={{
+              borderColor: colors.primary,
+              color: colors.primary,
+              height: 50,
+              padding: 15,
+              borderWidth: 1,
+              borderRadius: 5,
+            }}
+            placeholder="Urugero: 0785782928"
+            autoCapitalize="words"
+            mode="outlined"
+            onChangeText={(text) => this.onChangeText('phone', text)}
+            blurOnSubmit={true}
+          />
         </View>
         <View
           style={{
+            marginVertical: 20,
+            alignItems: 'flex-end',
             width: '100%',
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-            paddingBottom: 40,
-            height: '50%',
           }}>
-          <Text style={[styles.tabTitle, { justifyContent: 'flex-end' }]}>
-            Iyi serivisi muyigezwaho na{' '}
-            <Text style={[mediumText, { color: colors.primary }]}>
-              Polisi y'u Rwanda
-            </Text>
-          </Text>
+          <Button
+            text="Emeza"
+            loading={isFetching}
+            mode="contained"
+            disabled={!phone}
+            labelStyle={[
+              styles.confirmButton,
+              { color: 'white', fontWeight: 'bold' },
+            ]}
+            contentStyle={{
+              height: 50,
+              backgroundColor: colors.primary,
+            }}
+            onPress={this.onSubmit}>
+            ohereza
+          </Button>
         </View>
       </View>
     );
