@@ -3,6 +3,7 @@ import {
   CURRENT_USER_FETCHED,
   REGISTER_SUCCESSFUL,
   FETCHING_FAILED,
+  USER_NOT_FOUND,
 } from './types';
 import Http from '../../helpers/http';
 import { store } from '../store';
@@ -19,7 +20,7 @@ export const checkUser = (phone) => async (dispatch) => {
         payload: { nid, phone, location, name, registered: true },
       });
     } else {
-      dispatch({ type: CURRENT_USER_FETCHED, payload: { phone } });
+      dispatch({ type: USER_NOT_FOUND, payload: phone });
     }
   } catch (error) {
     dispatch({ type: FETCHING_FAILED });

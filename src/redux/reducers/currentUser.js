@@ -3,6 +3,7 @@ import {
   CURRENT_USER_FETCHED,
   REGISTER_SUCCESSFUL,
   FETCHING_FAILED,
+  USER_NOT_FOUND,
 } from '../actions/types';
 
 const initialState = {
@@ -22,6 +23,12 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         user: { ...state.user, ...payload },
+        isFetching: false,
+      };
+    case USER_NOT_FOUND:
+      return {
+        ...state,
+        user: { ...state.user, phone: payload },
         isFetching: false,
       };
     case REGISTER_SUCCESSFUL:
