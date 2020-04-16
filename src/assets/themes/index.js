@@ -52,7 +52,7 @@ export default {
     placeholder: genColor(0.2).text,
     backdrop: genColor().accentDark,
     error: genColor().error,
-    secondaryBorder: genColor().secondaryBorder,
+    secondary: genColor().secondary,
   },
   fonts: configureFonts(fontConfig),
   roundness: 5,

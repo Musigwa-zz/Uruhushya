@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-import { View, TextInput, Image } from 'react-native';
+import { View, Image } from 'react-native';
 import { connect } from 'react-redux';
-import { withTheme, Text, Button, Title } from 'react-native-paper';
+import { withTheme, Button, Title, TextInput } from 'react-native-paper';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 import { SIGN_UP, APP } from '../../constants/routeNames';
 import styles from '../../styles';
 import { checkUser } from '../../redux/actions/currentUser';
-import logo from '../../assets/images/logo.png';
+import login from '../../assets/images/start.png';
+import inputProps from '../../constants/inputProps';
 
 export class Login extends Component {
   state = { phone: '' };
@@ -31,19 +36,21 @@ export class Login extends Component {
           flex: 1,
           alignItems: 'center',
           justifyContent: 'center',
-          padding: 20,
+          paddingVertical: hp('8%'),
+          paddingHorizontal: wp('8%'),
+          backgroundColor: colors.secondary,
         }}>
         {user.registered === true
           ? navigation.navigate(APP)
           : didLogin === true
-          ? navigation.navigate(SIGN_UP, { phone })
+          ? navigation.navigate(SIGN_UP)
           : null}
         <Title
           style={{
             fontWeight: 'bold',
             fontSize: 30,
             textAlign: 'center',
-            marginBottom: 30,
+            marginBottom: hp('3%'),
             color: colors.primary,
           }}>
           Suzuma umwirondoro wawe
@@ -51,39 +58,33 @@ export class Login extends Component {
         <Image
           style={[
             styles.avatar,
-            { borderRadius: null, width: 250, height: 250, marginBottom: 30 },
+            {
+              borderRadius: null,
+              width: wp('90%'),
+              height: hp('40%'),
+              marginBottom: hp('3%'),
+            },
           ]}
-          source={logo}
+          source={login}
         />
 
-        <View style={{ width: '100%' }}>
-          <Text
-            style={{
-              color: colors.primary,
-              fontWeight: 'bold',
-              marginVertical: 10,
-            }}>
-            Nomero ya telephone
-          </Text>
-          <TextInput
-            style={{
-              borderColor: colors.primary,
-              color: colors.primary,
-              height: 50,
-              padding: 15,
-              borderWidth: 1,
-              borderRadius: 5,
-            }}
-            placeholder="Urugero: 078xxxxxxx"
-            autoCapitalize="words"
-            mode="outlined"
-            onChangeText={(text) => this.onChangeText('phone', text)}
-            blurOnSubmit={true}
-          />
-        </View>
+        <TextInput
+          {...inputProps.find((i) => i.id === 'phone')}
+          placeholder="Urugero: 078xxxxxxx"
+          mode="outlined"
+          style={{
+            width: '100%',
+            height: hp('6%'),
+          }}
+          selectionColor={colors.primary}
+          onChangeText={(text) => this.onChangeText('phone', text)}
+          returnKeyType="send"
+          onSubmitEditing={this.onSubmit}
+        />
+
         <View
           style={{
-            marginVertical: 20,
+            marginVertical: hp('3%'),
             alignItems: 'flex-end',
             width: '100%',
           }}>
