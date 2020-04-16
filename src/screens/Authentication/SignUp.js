@@ -84,12 +84,16 @@ class SignUp extends Component {
   };
 
   render() {
-    const { theme, locations, userData, navigation } = this.props;
+    const { theme, locations, userData, navigation, route } = this.props;
     const { user, isFetching } = userData;
+    const { params: { phone: defaultPhone } = {} } = route;
     let { provinces = [], districts = [], sectors = [] } = locations;
     const { colors } = theme;
     const { userInfo } = this.state;
 
+    if (defaultPhone) {
+      this.setState({ userInfo: { phone: defaultPhone } });
+    }
     if (user.registered === true) {
       navigation.navigate(APP);
     }
@@ -143,7 +147,7 @@ class SignUp extends Component {
             <TextInput
               key={Number(k)}
               {...input}
-              defaultValue={user[input.id]}
+              value={userInfo[input.id]}
               mode="outlined"
               style={{
                 width: '100%',

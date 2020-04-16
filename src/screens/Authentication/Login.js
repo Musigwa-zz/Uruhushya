@@ -16,12 +16,13 @@ export class Login extends Component {
 
   onSubmit = () => {
     const { phone } = this.state;
-    const { loginUser, userData: { user } = {}, navigation } = this.props;
+    const { loginUser, userData, navigation } = this.props;
+    const { user, isFetching } = userData;
     loginUser(phone);
-    if (user.registered === true) {
+    if (isFetching === false && user.registered === true) {
       navigation.navigate(APP);
     } else {
-      navigation.navigate(SIGN_UP);
+      navigation.navigate(SIGN_UP, { phone });
     }
   };
 
