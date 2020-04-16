@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "Uruhushya-tvOS.app"
-               BlueprintName = "Uruhushya-tvOS"
-               ReferencedContainer = "container:Uruhushya.xcodeproj">
+               BuildableName = "MovementClearance-tvOS.app"
+               BlueprintName = "MovementClearance-tvOS"
+               ReferencedContainer = "container:MovementClearance.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "Uruhushya-tvOSTests.xctest"
-               BlueprintName = "Uruhushya-tvOSTests"
-               ReferencedContainer = "container:Uruhushya.xcodeproj">
+               BuildableName = "MovementClearance-tvOSTests.xctest"
+               BlueprintName = "MovementClearance-tvOSTests"
+               ReferencedContainer = "container:MovementClearance.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "Uruhushya-tvOS.app"
-            BlueprintName = "Uruhushya-tvOS"
-            ReferencedContainer = "container:Uruhushya.xcodeproj">
+            BuildableName = "MovementClearance-tvOS.app"
+            BlueprintName = "MovementClearance-tvOS"
+            ReferencedContainer = "container:MovementClearance.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "Uruhushya-tvOS.app"
-            BlueprintName = "Uruhushya-tvOS"
-            ReferencedContainer = "container:Uruhushya.xcodeproj">
+            BuildableName = "MovementClearance-tvOS.app"
+            BlueprintName = "MovementClearance-tvOS"
+            ReferencedContainer = "container:MovementClearance.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

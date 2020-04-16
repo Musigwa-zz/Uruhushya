@@ -1,5 +1,5 @@
 {
-  "name": "Uruhushya",
+  "name": "MovementClearance",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -38,10 +38,8 @@
     "@babel/runtime": "7.9.2",
     "@react-native-community/eslint-config": "1.0.0",
     "babel-jest": "25.3.0",
-    "codecov": "3.6.5",
     "enzyme": "3.11.0",
     "eslint": "6.8.0",
-    "faker": "4.1.0",
     "husky": "4.2.5",
     "jest": "25.3.0",
     "lint-staged": "10.1.3",

@@ -44,8 +44,8 @@ def flipper_post_install(installer)
   end
 end
 
-target 'Uruhushya' do
-  # Pods for Uruhushya
+target 'MovementClearance' do
+  # Pods for MovementClearance
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -77,12 +77,9 @@ target 'Uruhushya' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
-  pod 'react-native-simple-toast', :path => '../node_modules/react-native-simple-toast'
-
-  target 'UruhushyaTests' do
+  target 'MovementClearanceTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -99,10 +96,10 @@ target 'Uruhushya' do
   end
 end
 
-target 'Uruhushya-tvOS' do
-  # Pods for Uruhushya-tvOS
+target 'MovementClearance-tvOS' do
+  # Pods for MovementClearance-tvOS
 
-  target 'Uruhushya-tvOSTests' do
+  target 'MovementClearance-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Uruhushya</string>
+	<string>MovementClearance</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -71,9 +71,6 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
-		<string>icomoon.ttf</string>
-		<string>SF-Pro-Text-Medium.ttf</string>
-		<string>SF-Pro-Text.ttf</string>
 	</array>
 </dict>
 </plist>
