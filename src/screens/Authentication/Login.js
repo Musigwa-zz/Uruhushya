@@ -9,7 +9,7 @@ import { checkUser } from '../../redux/actions/currentUser';
 import logo from '../../assets/images/logo.png';
 
 export class Login extends Component {
-  state = { phone: null };
+  state = { phone: '' };
   onChangeText = (target, value) => {
     this.setState({ [target]: value });
   };
@@ -74,7 +74,7 @@ export class Login extends Component {
               borderWidth: 1,
               borderRadius: 5,
             }}
-            placeholder="Urugero: 0785782928"
+            placeholder="Urugero: 078xxxxxxx"
             autoCapitalize="words"
             mode="outlined"
             onChangeText={(text) => this.onChangeText('phone', text)}
@@ -88,18 +88,10 @@ export class Login extends Component {
             width: '100%',
           }}>
           <Button
-            text="Emeza"
-            loading={isFetching}
             mode="contained"
-            disabled={!phone}
-            labelStyle={[
-              styles.confirmButton,
-              { color: 'white', fontWeight: 'bold' },
-            ]}
-            contentStyle={{
-              height: 50,
-              backgroundColor: colors.primary,
-            }}
+            loading={isFetching}
+            disabled={phone.length !== 10}
+            labelStyle={{ color: 'white', fontWeight: 'bold' }}
             onPress={this.onSubmit}>
             ohereza
           </Button>

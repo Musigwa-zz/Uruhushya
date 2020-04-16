@@ -13,7 +13,7 @@ import {
 
 import styles from '../../styles';
 import Select from '../../components/Inputs/Select';
-import location from '../../assets/images/location.png';
+import direction from '../../assets/images/direction.png';
 import {
   cacheRequest,
   getReasons,
@@ -58,7 +58,7 @@ class PassRequest extends Component {
     return (
       <View
         style={[styles.container, { padding: 30, backgroundColor: 'white' }]}>
-        <Avatar.Image size={200} style={styles.avatar} source={location} />
+        <Avatar.Image size={200} style={styles.avatar} source={direction} />
         <Title
           style={{
             fontWeight: 'bold',

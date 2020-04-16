@@ -1,21 +1,13 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, TextInput as Input } from 'react-native';
 import { connect } from 'react-redux';
-import {
-  Text,
-  Title,
-  Avatar,
-  withTheme,
-  Button,
-  Banner,
-} from 'react-native-paper';
+import { Text, Title, Avatar, withTheme, Button } from 'react-native-paper';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 
 import styles from '../../styles';
-import location from '../../assets/images/location.png';
+import direction from '../../assets/images/direction.png';
 import { submitRequest } from '../../redux/actions/passRequest';
-import { HOME_SCREEN } from '../../constants/routeNames';
 
 class PassRequest extends Component {
   state = {
@@ -79,7 +71,7 @@ class PassRequest extends Component {
     return (
       <View
         style={[styles.container, { padding: 30, backgroundColor: 'white' }]}>
-        <Avatar.Image size={200} style={styles.avatar} source={location} />
+        <Avatar.Image size={200} style={styles.avatar} source={direction} />
         <Title
           style={{
             fontWeight: 'bold',

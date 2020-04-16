@@ -13,9 +13,10 @@ export const checkUser = (phone) => async (dispatch) => {
     dispatch({ type: USER_FETCHING });
     const { body } = await Http.post('users/get', { phone });
     if (body.status === true) {
+      const { name, nid_passport: nid, location } = body.data;
       dispatch({
         type: CURRENT_USER_FETCHED,
-        payload: { ...body.data, registered: true },
+        payload: { nid, phone, location, name, registered: true },
       });
     } else {
       dispatch({ type: CURRENT_USER_FETCHED, payload: { phone } });
@@ -39,7 +40,7 @@ export const registerUser = (data) => async (dispatch) => {
     if (body.status === true) {
       dispatch({
         type: REGISTER_SUCCESSFUL,
-        payload: { registered: true, ...data },
+        payload: { registered: true, ...data, phone: data.phone || user.phone },
       });
     } else {
       DropAlert(body.message || message, 'warn');

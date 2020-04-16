@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import Boarding from 'react-native-onboarding-swiper';
-import { Avatar, withTheme, IconButton, Colors } from 'react-native-paper';
+import { Avatar, withTheme } from 'react-native-paper';
 
-import info from '../assets/images/ask.png';
-import hospital from '../assets/images/hospital.png';
+import info from '../assets/images/question.png';
+import hospital from '../assets/images/medicine.png';
 import work from '../assets/images/work.png';
 import shopping from '../assets/images/shopping.png';
 

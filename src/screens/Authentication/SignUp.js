@@ -23,7 +23,7 @@ class SignUp extends Component {
       district: {},
       sector: {},
       name: null,
-      phone: null,
+      phone: '',
       nid: null,
     },
     loading: false,
@@ -101,8 +101,14 @@ class SignUp extends Component {
       district: { name: districtName = 'Akarere utuyemo' } = {},
       sector: { name: sectorName = 'Umurenge utuyemo' } = {},
     } = userInfo;
-    const { name, nid, sector, district, province } = userInfo;
-    const enabled = name && nid && sector.id && district.id && province.id;
+    const { name, nid, phone, sector, district, province } = userInfo;
+    const enabled =
+      name &&
+      nid &&
+      (phone.length === 10 || user.phone) &&
+      sector.id &&
+      district.id &&
+      province.id;
 
     return (
       <View
@@ -160,17 +166,16 @@ class SignUp extends Component {
             theme={theme}
           />
         )}
-        {districts.length !==
-          0(
-            <Select
-              title={districtName}
-              popupTitle="Hitamo akarere utuyemo"
-              style={{ marginTop: 20 }}
-              data={districts}
-              onSelect={this.confirmDistrict}
-              theme={theme}
-            />,
-          )}
+        {districts.length !== 0 && (
+          <Select
+            title={districtName}
+            popupTitle="Hitamo akarere utuyemo"
+            style={{ marginTop: 20 }}
+            data={districts}
+            onSelect={this.confirmDistrict}
+            theme={theme}
+          />
+        )}
         {sectors.length !== 0 && (
           <Select
             title={sectorName}

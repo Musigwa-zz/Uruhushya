@@ -24,7 +24,7 @@ export const submitRequest = ({
     passData: { request } = {},
     userData: { user } = {},
   } = store.getState();
-  const { name, nid_passport, sector = {}, location } = user;
+  const { name, nid, sector = {}, location } = user;
   const fromLocation = sector.id || location;
   const goDate = moment(depDate).format('L');
   const goTime = moment(depDate).format('HH:mm');
@@ -34,7 +34,7 @@ export const submitRequest = ({
     ...request,
     ...data,
     fromLocation,
-    nid: nid_passport,
+    nid: nid,
     name,
     goDate,
     goTime,
@@ -43,8 +43,10 @@ export const submitRequest = ({
   };
   let message = 'Gusaba uruhushya ntibyakozwe neza. Ongera ugerageze!';
   try {
+    console.log('Before======:', reqBody);
     dispatch({ type: PASS_FETCHING, payload: reqBody });
     const { body, status } = await Http.post('permissions/request', reqBody);
+    console.log('After=======:', reqBody, body);
     if (status === 200) {
       DropAlert(body.message, 'success');
       dispatch({ type: SEND_REQ_SUCCESS, payload: {} });

@@ -29,6 +29,14 @@ const fontConfig = {
   },
 };
 
+export const illustrations = [
+  { name: 'medicine', url: 'https://undraw.co' },
+  { name: 'questions', url: 'https://undraw.co' },
+  { name: 'shopping', url: 'https://undraw.co' },
+  { name: 'work', url: 'https://www.manypixels.co/gallery/' },
+  { name: 'directions', url: 'https://undraw.co' },
+];
+
 export default {
   ...DefaultTheme,
   colors: {

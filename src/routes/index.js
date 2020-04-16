@@ -12,7 +12,7 @@ export default () => {
   return (
     <Stack.Navigator
       screenOptions={{ header: () => null }}
-      initialRouteName={AUTH}>
+      initialRouteName={ONBOARDING}>
       <Stack.Screen
         name={ONBOARDING}
         component={Onboarding}
