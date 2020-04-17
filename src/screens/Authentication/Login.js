@@ -33,9 +33,7 @@ export class Login extends Component {
     return (
       <View
         style={{
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center',
+          ...styles.container,
           paddingVertical: hp('8%'),
           paddingHorizontal: wp('8%'),
           backgroundColor: colors.secondary,

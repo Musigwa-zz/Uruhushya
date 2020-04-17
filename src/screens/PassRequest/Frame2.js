@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import { Text, Title, Avatar, withTheme, Button } from 'react-native-paper';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 import styles from '../../styles';
 import direction from '../../assets/images/direction.png';
@@ -70,8 +74,17 @@ class PassRequest extends Component {
 
     return (
       <View
-        style={[styles.container, { padding: 30, backgroundColor: 'white' }]}>
-        <Avatar.Image size={200} style={styles.avatar} source={direction} />
+        style={{
+          ...styles.container,
+          paddingVertical: hp('8%'),
+          paddingHorizontal: wp('8%'),
+          backgroundColor: colors.secondary,
+        }}>
+        <Avatar.Image
+          size={hp('20%')}
+          style={styles.avatar}
+          source={direction}
+        />
         <Title
           style={{
             fontWeight: 'bold',
@@ -80,7 +93,7 @@ class PassRequest extends Component {
           }}>
           Andi makuru y'urugendo
         </Title>
-        <View style={{ width: '100%', marginTop: 15 }}>
+        <View style={{ width: '100%', marginTop: hp('1.3%') }}>
           <Text>Uragenda ryari?</Text>
           <TouchableOpacity
             activeOpacity={0.8}
@@ -89,10 +102,9 @@ class PassRequest extends Component {
               alignItems: 'center',
               flexDirection: 'row',
               marginTop: 5,
-              marginBottom: 10,
-              paddingRight: 15,
-              paddingLeft: 8,
-              height: 45,
+              marginBottom: hp('1.3%'),
+              padding: 8,
+              height: hp('6%'),
               width: '100%',
               backgroundColor: colors.primaryLight,
               borderWidth: 0.5,
@@ -117,7 +129,7 @@ class PassRequest extends Component {
               marginBottom: 10,
               paddingRight: 15,
               paddingLeft: 8,
-              height: 45,
+              height: hp('6%'),
               backgroundColor: colors.primaryLight,
               width: '100%',
               borderWidth: 0.5,
@@ -146,12 +158,12 @@ class PassRequest extends Component {
           autoCapitalize="words"
           style={{
             width: '100%',
-            marginTop: 10,
+            marginTop: hp('1.3%'),
             borderRadius: 5,
             borderColor: 'gray',
-            padding: 15,
+            padding: 8,
             borderWidth: 0.5,
-            height: Math.max(45, height),
+            height: Math.max(hp('6%'), height),
           }}
           multiline={true}
           onContentSizeChange={(event) => {
@@ -159,12 +171,14 @@ class PassRequest extends Component {
           }}
           onChangeText={(text) => this.onChangeText('description', text)}
           blurOnSubmit={true}
+          returnKeyType="send"
+          onSubmitEditing={this.onSubmit}
         />
         <Button
           mode="contained"
           loading={isFetching}
           disabled={!(goDate && come_date && description)}
-          style={{ marginTop: 30 }}
+          style={{ marginTop: hp('3.5%') }}
           labelStyle={{ color: 'white', fontWeight: 'bold' }}
           onPress={this.onSubmit}>
           ohereza

@@ -10,10 +10,14 @@ import {
   Button,
   RadioButton,
 } from 'react-native-paper';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 import styles from '../../styles';
 import Select from '../../components/Inputs/Select';
-import direction from '../../assets/images/direction.png';
+import place from '../../assets/images/place.png';
 import {
   cacheRequest,
   getReasons,
@@ -57,8 +61,13 @@ class PassRequest extends Component {
     );
     return (
       <View
-        style={[styles.container, { padding: 30, backgroundColor: 'white' }]}>
-        <Avatar.Image size={200} style={styles.avatar} source={direction} />
+        style={{
+          ...styles.container,
+          paddingVertical: hp('8%'),
+          paddingHorizontal: wp('8%'),
+          backgroundColor: colors.secondary,
+        }}>
+        <Avatar.Image size={hp('20%')} style={styles.avatar} source={place} />
         <Title
           style={{
             fontWeight: 'bold',
@@ -67,24 +76,15 @@ class PassRequest extends Component {
           }}>
           Uzuza imyirondoro y'aho ujya
         </Title>
-        <Text
-          style={{
-            color: colors.disabled,
-            fontWeight: 'bold',
-            marginBottom: 5,
-          }}>
-          Gutanga umwirondoro wuzuye bizagufasha gusaba no kubona uruhushya
-          rw'ingendo mu buryo bwihuse
-        </Text>
         <TextInput
           label="Aho ugiye"
           mode="outlined"
           autoCapitalize="words"
-          style={{ width: '100%', height: 45, marginTop: 10 }}
+          style={{ width: '100%', height: hp('6%'), marginTop: hp('1.5%') }}
           selectionColor={colors.primary}
           onChangeText={(text) => this.onChangeText('placeName', text)}
         />
-        <Text style={{ marginTop: 15, alignSelf: 'flex-start' }}>
+        <Text style={{ marginTop: hp('1.3%'), alignSelf: 'flex-start' }}>
           Uragenda n'iki?
         </Text>
         <View
@@ -93,10 +93,10 @@ class PassRequest extends Component {
             alignItems: 'center',
             flexDirection: 'row',
             marginTop: 5,
-            marginBottom: 10,
-            paddingRight: 15,
-            paddingLeft: 8,
-            height: 45,
+            marginBottom: hp('1.3%'),
+            paddingRight: wp('2.5%'),
+            paddingLeft: wp('1%'),
+            height: hp('6%'),
             width: '100%',
             borderWidth: 0.5,
             borderRadius: 5,
@@ -125,7 +125,7 @@ class PassRequest extends Component {
           label="Pulaki y'ikiyanbiziga"
           mode="outlined"
           autoCapitalize="words"
-          style={{ width: '100%', height: 45 }}
+          style={{ width: '100%', height: hp('6%') }}
           selectionColor={colors.primary}
           onChangeText={(text) => this.onChangeText('plateNumber', text)}
         />
@@ -133,7 +133,7 @@ class PassRequest extends Component {
           <Select
             title={"Impamvu y'urugendo" || reason.name}
             popupTitle="Hitamo impamvu y'urugendo"
-            style={{ marginTop: 15 }}
+            style={{ marginTop: hp('2%') }}
             data={reasons}
             onSelect={(id) => this.onChangeText('reason', id)}
             theme={theme}
@@ -143,7 +143,7 @@ class PassRequest extends Component {
           mode="contained"
           loading={isFetching}
           disabled={!enabled}
-          style={{ marginTop: 30 }}
+          style={{ marginTop: hp('3.5%') }}
           labelStyle={{ color: 'white', fontWeight: 'bold' }}
           onPress={this.onSubmit}>
           komeza
