@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
-import { Text, Title, withTheme, TextInput, Button } from 'react-native-paper';
+import { Text, withTheme, TextInput, Button } from 'react-native-paper';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 import inputs from '../../constants/inputProps';
 import styles from '../../styles';
@@ -84,19 +88,12 @@ class SignUp extends Component {
   };
 
   render() {
-    const { theme, locations, userData, navigation, route } = this.props;
+    const { theme, locations, userData, navigation } = this.props;
     const { user, isFetching } = userData;
-    const { params: { phone: defaultPhone } = {} } = route;
     let { provinces = [], districts = [], sectors = [] } = locations;
     const { colors } = theme;
     const { userInfo } = this.state;
 
-    if (defaultPhone) {
-      this.setState({ userInfo: { phone: defaultPhone } });
-    }
-    if (user.registered === true) {
-      navigation.navigate(APP);
-    }
     if (provinces.length) {
       provinces = provinces.map((p) => ({ ...p, name: p.izina }));
     }
@@ -113,89 +110,127 @@ class SignUp extends Component {
       sector.id &&
       district.id &&
       province.id;
-
     return (
       <View
-        style={[styles.container, { padding: 30, backgroundColor: 'white' }]}>
+        style={[
+          styles.container,
+          {
+            paddingVertical: hp('3%'),
+            paddingHorizontal: wp('6%'),
+            backgroundColor: colors.secondary,
+          },
+        ]}>
         <Icon
           name="adduser"
           type="ant-design"
-          size={60}
+          size={hp('8%')}
           color={colors.primary}
-          style={{ marginBottom: 20 }}
+          style={{ marginBottom: hp('3%') }}
         />
-        <Title
+        {isFetching === false &&
+          user.registered === true &&
+          navigation.navigate(APP)}
+        <Text
           style={{
             fontWeight: 'bold',
-            textTransform: 'capitalize',
+            fontSize: hp('3.1%'),
             marginBottom: 5,
             color: colors.primary,
           }}>
           Reka twuzuze imyirondoro yawe!
-        </Title>
+        </Text>
         <Text
           style={{
             color: colors.disabled,
             fontWeight: 'bold',
-            marginBottom: 5,
+            lineHeight: hp('2.5%'),
+            marginBottom: hp('2%'),
           }}>
           Gutanga umwirondoro wuzuye bizagufasha gusaba no kubona uruhushya
           rw'ingendo mu buryo bwihuse
         </Text>
-        {inputs.map((input, k) => {
-          return (
-            <TextInput
-              key={Number(k)}
-              {...input}
-              value={userInfo[input.id]}
-              mode="outlined"
-              style={{
-                width: '100%',
-                height: 45,
-                marginTop: k === 0 ? 20 : 10,
-              }}
-              selectionColor={colors.primary}
-              onChangeText={(text) => this.onChangeText(input.id, text)}
+        {inputs
+          .filter((ip) => ip.id === 'nid' || ip.id === 'name')
+          .map((input, k) => (
+              <TextInput
+                key={Number(k)}
+                {...input}
+                defaultValue={
+                  input.id === 'phone' && user.phone ? user.phone : null
+                }
+                mode="outlined"
+                style={{
+                  width: '100%',
+                  height: hp('6%'),
+                  marginTop: hp('1.1%'),
+                }}
+                selectionColor={colors.primary}
+                onChangeText={(text) => this.onChangeText(input.id, text)}
+              />
+            ))}
+        <View
+          style={{
+            width: '100%',
+            justifyContent: 'space-between',
+            flexDirection: 'row',
+            marginTop: hp('2%'),
+          }}>
+          {provinces.length !== 0 && (
+            <Select
+              title={provinceName}
+              popupTitle="Hitamo intara utuyemo"
+              style={{ width: districts.length !== 0 ? '47%' : '100%' }}
+              data={provinces}
+              onSelect={this.confirmProvince}
+              theme={theme}
             />
-          );
-        })}
-
-        {provinces.length !== 0 && (
-          <Select
-            title={provinceName}
-            popupTitle="Hitamo intara utuyemo"
-            style={{ marginTop: 20 }}
-            data={provinces}
-            onSelect={this.confirmProvince}
-            theme={theme}
+          )}
+          {districts.length !== 0 && (
+            <Select
+              title={districtName}
+              popupTitle="Hitamo akarere utuyemo"
+              style={{ width: '47%' }}
+              data={districts}
+              onSelect={this.confirmDistrict}
+              theme={theme}
+            />
+          )}
+        </View>
+        <View
+          style={{
+            width: '100%',
+            justifyContent: 'space-between',
+            flexDirection: 'row',
+            marginTop: hp('2%'),
+          }}>
+          {sectors.length !== 0 && (
+            <Select
+              title={sectorName}
+              popupTitle="Hitamo umurenge utuyemo"
+              style={{ width: '47%', height: hp('6%'), alignSelf: 'flex-end' }}
+              data={sectors}
+              onSelect={this.confirmSector}
+              theme={theme}
+            />
+          )}
+          <TextInput
+            {...inputs.find((i) => i.id === 'phone')}
+            defaultValue={user.phone ? user.phone : null}
+            mode="outlined"
+            style={{
+              width: sectors.length !== 0 ? '47%' : '100%',
+              height: hp('6%'),
+            }}
+            selectionColor={colors.primary}
+            onChangeText={(text) => this.onChangeText('phone', text)}
           />
-        )}
-        {districts.length !== 0 && (
-          <Select
-            title={districtName}
-            popupTitle="Hitamo akarere utuyemo"
-            style={{ marginTop: 20 }}
-            data={districts}
-            onSelect={this.confirmDistrict}
-            theme={theme}
-          />
-        )}
-        {sectors.length !== 0 && (
-          <Select
-            title={sectorName}
-            popupTitle="Hitamo umurenge utuyemo"
-            style={{ marginTop: 20 }}
-            data={sectors}
-            onSelect={this.confirmSector}
-            theme={theme}
-          />
-        )}
+        </View>
         <Button
           mode="contained"
           loading={isFetching}
           disabled={!enabled}
-          style={{ marginTop: 30 }}
-          labelStyle={{ color: 'white', fontWeight: 'bold' }}
+          style={{ marginTop: hp('3.5%') }}
+          labelStyle={{ color: colors.secondary, fontWeight: 'bold' }}
           onPress={this.onSubmit}>
           emeza umwirondoro
         </Button>

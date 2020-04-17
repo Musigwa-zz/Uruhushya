@@ -18,6 +18,8 @@ export const CURRENT_USER_FETCHED = 'CURRENT_USER_FETCHED';
 export const REGISTER_SUCCESSFUL = 'REGISTER_SUCCESSFUL';
 export const USER_FETCHING = 'USER_FETCHING';
 export const USER_NOT_FOUND = 'USER_NOT_FOUND';
+export const LOGIN_FLAG = 'LOGIN_FLAG';
+
 /**
  * @description Pass Requests
  */

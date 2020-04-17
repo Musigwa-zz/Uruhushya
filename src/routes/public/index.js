@@ -1,11 +1,11 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import { withTheme } from 'react-native-paper';
 import LoginScreen from '../../screens/Authentication/Login';
 import SignUp from '../../screens/Authentication/SignUp';
 import Onboarding from '../../screens/Onboarding';
 import { LOGIN, SIGN_UP, ONBOARDING } from '../../constants/routeNames';
-import { withTheme } from 'react-native-paper';
 import { store } from '../../redux/store';
 
 const Stack = createStackNavigator();

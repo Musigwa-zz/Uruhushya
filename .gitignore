@@ -62,3 +62,6 @@ buck-out/
 
 *.rest
 *.http
+
+# Coverage
+coverage

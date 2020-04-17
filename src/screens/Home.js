@@ -2,8 +2,16 @@ import React from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { withTheme, Title, Text } from 'react-native-paper';
+
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+import style from '../styles';
+
+
 import Icon from '../components/Icons';
-import { PASS_REQUEST, PASS_FRAME2 } from '../constants/routeNames';
+import { PASS_REQUEST } from '../constants/routeNames';
 
 const menu = [
   {
@@ -27,21 +35,17 @@ const menu = [
 ];
 
 const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-    backgroundColor: 'white',
-  },
   title: {
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 25,
+    marginBottom: hp('1%'),
   },
   description: {
     fontWeight: 'bold',
     textAlign: 'center',
-    margin: 10,
+    lineHeight: hp('3.4%'),
+    fontSize: hp('2.1%'),
+    margin: hp('0.9%'),
   },
   menuWrapper: {
     flexWrap: 'wrap',
@@ -50,16 +54,16 @@ const styles = StyleSheet.create({
   },
   menu: {
     justifyContent: 'space-evenly',
-    marginTop: 20,
+    marginTop: hp('2.2%'),
     alignItems: 'center',
-    width: 150,
-    padding: 10,
-    borderRadius: 10,
+    width: wp('45%'),
+    paddingVertical: hp('1%'),
+    paddingHorizontal: wp('3%'),
+    borderRadius: hp('2%'),
   },
   menuText: {
     textAlign: 'center',
-    lineHeight: 24,
-    fontSize: 18,
+    fontSize: hp('2.8%'),
     fontWeight: 'bold',
   },
 });
@@ -67,10 +71,10 @@ const styles = StyleSheet.create({
 const Home = ({ userData: { user } = {}, theme, navigation }) => {
   const { colors } = theme;
   return (
-    <View style={styles.container}>
+    <View style={[style.container, { backgroundColor: colors.secondary }]}>
       <Title style={[styles.title, { color: colors.disabled }]}>
         Murakaza neza,
-        <Text style={{ color: colors.primary }}>{`\t\t${user.name}`}</Text>
+        <Text style={{ color: colors.primary }}>{`\t${user.name}`}</Text>
       </Title>
       <Text style={[styles.description, { color: colors.disabled }]}>
         Kugira ngo utangire gukoresha iri koranabuhanga, wahitamo igikorwa kimwe
@@ -85,11 +89,11 @@ const Home = ({ userData: { user } = {}, theme, navigation }) => {
             style={[
               styles.menu,
               {
-                height: i + 1 === menu.length ? 150 : 200,
+                height: i + 1 === menu.length ? hp('23%') : hp('30%'),
                 backgroundColor: m.color(0.1),
               },
             ]}>
-            <Icon {...m.iconProps} color={m.color()} size={40} />
+            <Icon {...m.iconProps} color={m.color()} size={hp('6%')} />
             <Text style={[styles.menuText, { color: colors.disabled }]}>
               {m.title}
             </Text>

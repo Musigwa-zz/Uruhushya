@@ -4,12 +4,14 @@ import {
   REGISTER_SUCCESSFUL,
   FETCHING_FAILED,
   USER_NOT_FOUND,
+  LOGIN_FLAG,
 } from './types';
 import Http from '../../helpers/http';
 import { store } from '../store';
 import { DropAlert } from '../../components/Alerts';
 
 export const checkUser = (phone) => async (dispatch) => {
+  const message = 'Gusuzuma imyirondoro ntibigenze neza. Ongera ugerageze!';
   try {
     dispatch({ type: USER_FETCHING });
     const { body } = await Http.post('users/get', { phone });
@@ -22,13 +24,15 @@ export const checkUser = (phone) => async (dispatch) => {
     } else {
       dispatch({ type: USER_NOT_FOUND, payload: phone });
     }
+    dispatch({ type: LOGIN_FLAG });
   } catch (error) {
+    DropAlert(error.message || message, 'error');
     dispatch({ type: FETCHING_FAILED });
   }
 };
 
 export const registerUser = (data) => async (dispatch) => {
-  let message = 'Kwiyandikisha ntibigenze neza. Ongera ugerageze!';
+  const message = 'Kwiyandikisha ntibigenze neza. Ongera ugerageze!';
   try {
     const { userData: { user } = {} } = store.getState();
     dispatch({ type: USER_FETCHING });

@@ -29,14 +29,10 @@ const fontConfig = {
   },
 };
 
-export const illustrations = [
-  { name: 'medicine', url: 'https://undraw.co' },
-  { name: 'questions', url: 'https://undraw.co' },
-  { name: 'shopping', url: 'https://undraw.co' },
-  { name: 'work', url: 'https://www.manypixels.co/gallery/' },
-  { name: 'directions', url: 'https://undraw.co' },
-];
-
+export const illustrations = {
+  names: ['medicine', 'questions', 'shopping', 'work', 'directions'],
+  urls: ['https://www.manypixels.co/gallery/', 'https://undraw.co'],
+};
 export default {
   ...DefaultTheme,
   colors: {
@@ -52,7 +48,7 @@ export default {
     placeholder: genColor(0.2).text,
     backdrop: genColor().accentDark,
     error: genColor().error,
-    secondaryBorder: genColor().secondaryBorder,
+    secondary: genColor().secondary,
   },
   fonts: configureFonts(fontConfig),
   roundness: 5,

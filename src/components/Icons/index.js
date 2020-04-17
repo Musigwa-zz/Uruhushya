@@ -14,7 +14,6 @@ import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import Fontisto from 'react-native-vector-icons/Fontisto';
-import Custom from './Custom';
 import themes from '../../assets/themes';
 
 const { colors } = themes;
@@ -48,8 +47,6 @@ const getIconType = (type) => {
       return AntDesign;
     case 'feather':
       return Feather;
-    case 'custom':
-      return Custom;
     default:
       return MaterialIcon;
   }

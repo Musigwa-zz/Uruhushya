@@ -1,12 +1,12 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import { withTheme } from 'react-native-paper';
 import {
   HOME_SCREEN,
   PASS_REQUEST,
   PASS_FRAME2,
 } from '../../constants/routeNames';
-import { withTheme } from 'react-native-paper';
 import HomeScreen from '../../screens/Home';
 import PassRequest from '../../screens/PassRequest/index';
 import Frame2 from '../../screens/PassRequest/Frame2';
@@ -28,7 +28,7 @@ const HomeRoute = ({ theme }) => {
         options={{
           title: null,
           headerStyle: { backgroundColor: colors.primary },
-          headerTintColor: 'white',
+          headerTintColor: colors.secondary,
         }}
       />
       <Stack.Screen
@@ -37,7 +37,7 @@ const HomeRoute = ({ theme }) => {
         options={{
           title: null,
           headerStyle: { backgroundColor: colors.primary },
-          headerTintColor: 'white',
+          headerTintColor: colors.secondary,
         }}
       />
     </Stack.Navigator>

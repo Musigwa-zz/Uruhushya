@@ -51,7 +51,7 @@ SelectInput.defaultProps = {
   cancelButtonText: 'Bireke',
   selectButtonText: 'Emeza',
   listEmptyTitle: 'Nta byabonetse',
-  searchPlaceHolderText: `Andika hano ushakisha `.padEnd(6, '.'),
+  searchPlaceHolderText: 'Andika hano ushakisha '.padEnd(6, '.'),
   style: {},
 };
 
