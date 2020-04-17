@@ -12,6 +12,4 @@ export const setAlertRef = (ref) => {
  * @param  {string} [title=''] The alert title to be shown
  * @return {function} The alertWithType method that renders a dropdown
  */
-export const DropAlert = (message, type, title) => {
-  return AlertRef.alertWithType(type, title, message);
-};
+export const DropAlert = (message, type, title) => AlertRef.alertWithType(type, title, message);

@@ -148,7 +148,7 @@ class PassRequest extends Component {
             timeZoneOffsetInMinutes={0}
             value={date}
             mode={mode}
-            is24Hour={true}
+            is24Hour
             display="default"
             onChange={this.onChange}
           />
@@ -165,12 +165,12 @@ class PassRequest extends Component {
             borderWidth: 0.5,
             height: Math.max(hp('6%'), height),
           }}
-          multiline={true}
+          multiline
           onContentSizeChange={(event) => {
             this.setState({ height: event.nativeEvent.contentSize.height });
           }}
           onChangeText={(text) => this.onChangeText('description', text)}
-          blurOnSubmit={true}
+          blurOnSubmit
           returnKeyType="send"
           onSubmitEditing={this.onSubmit}
         />
@@ -179,7 +179,7 @@ class PassRequest extends Component {
           loading={isFetching}
           disabled={!(goDate && come_date && description)}
           style={{ marginTop: hp('3.5%') }}
-          labelStyle={{ color: 'white', fontWeight: 'bold' }}
+          labelStyle={{ color: colors.secondary, fontWeight: 'bold' }}
           onPress={this.onSubmit}>
           ohereza
         </Button>

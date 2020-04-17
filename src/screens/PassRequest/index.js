@@ -144,7 +144,7 @@ class PassRequest extends Component {
           loading={isFetching}
           disabled={!enabled}
           style={{ marginTop: hp('3.5%') }}
-          labelStyle={{ color: 'white', fontWeight: 'bold' }}
+          labelStyle={{ color: colors.secondary, fontWeight: 'bold' }}
           onPress={this.onSubmit}>
           komeza
         </Button>

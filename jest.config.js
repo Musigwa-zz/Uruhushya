@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'Planner',
+  displayName: 'Clearance',
   verbose: true,
   preset: 'react-native',
   testMatch: ['**/?(*.)+(spec|test).js'],

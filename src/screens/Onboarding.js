@@ -1,11 +1,12 @@
 import React from 'react';
-import Icon from '../components/Icons';
 import { StyleSheet, View, Text, Image } from 'react-native';
 import Boarding from 'react-native-app-intro-slider';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import { withTheme } from 'react-native-paper';
+import Icon from '../components/Icons';
 
 import info from '../assets/images/question.png';
 import hospital from '../assets/images/medicine.png';
@@ -13,7 +14,6 @@ import work from '../assets/images/work.png';
 import shopping from '../assets/images/shopping.png';
 
 import { AUTH } from '../constants/routeNames';
-import { withTheme } from 'react-native-paper';
 
 const slides = [
   {
@@ -53,7 +53,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: wp('3%'),
     paddingBottom: hp('8%'),
-    backgroundColor: 'white',
   },
   avatar: {
     borderRadius: null,
@@ -88,7 +87,7 @@ const Onboarding = ({ navigation, theme }) => {
     <Boarding
       keyExtractor={({ key }) => String(key)}
       renderItem={({ item }) => (
-        <View style={styles.container}>
+        <View style={[styles.container, { backgroundColor: colors.secondary }]}>
           <Image source={item.image} style={styles.avatar} />
           <View
             style={{

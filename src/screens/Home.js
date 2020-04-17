@@ -7,9 +7,11 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import style from '../styles';
+
 
 import Icon from '../components/Icons';
-import { PASS_REQUEST, PASS_FRAME2 } from '../constants/routeNames';
+import { PASS_REQUEST } from '../constants/routeNames';
 
 const menu = [
   {
@@ -33,12 +35,6 @@ const menu = [
 ];
 
 const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-    backgroundColor: 'white',
-  },
   title: {
     fontWeight: 'bold',
     textAlign: 'center',
@@ -75,7 +71,7 @@ const styles = StyleSheet.create({
 const Home = ({ userData: { user } = {}, theme, navigation }) => {
   const { colors } = theme;
   return (
-    <View style={styles.container}>
+    <View style={[style.container, { backgroundColor: colors.secondary }]}>
       <Title style={[styles.title, { color: colors.disabled }]}>
         Murakaza neza,
         <Text style={{ color: colors.primary }}>{`\t${user.name}`}</Text>

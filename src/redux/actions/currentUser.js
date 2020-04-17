@@ -11,7 +11,7 @@ import { store } from '../store';
 import { DropAlert } from '../../components/Alerts';
 
 export const checkUser = (phone) => async (dispatch) => {
-  let message = 'Gusuzuma imyirondoro ntibigenze neza. Ongera ugerageze!';
+  const message = 'Gusuzuma imyirondoro ntibigenze neza. Ongera ugerageze!';
   try {
     dispatch({ type: USER_FETCHING });
     const { body } = await Http.post('users/get', { phone });
@@ -32,7 +32,7 @@ export const checkUser = (phone) => async (dispatch) => {
 };
 
 export const registerUser = (data) => async (dispatch) => {
-  let message = 'Kwiyandikisha ntibigenze neza. Ongera ugerageze!';
+  const message = 'Kwiyandikisha ntibigenze neza. Ongera ugerageze!';
   try {
     const { userData: { user } = {} } = store.getState();
     dispatch({ type: USER_FETCHING });

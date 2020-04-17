@@ -1,3 +1,4 @@
+import moment from 'moment';
 import {
   FETCHING_FAILED,
   PASS_FETCHING,
@@ -8,7 +9,6 @@ import {
 } from './types';
 import Http from '../../helpers/http';
 import { store } from '../store';
-import moment from 'moment';
 import { DropAlert } from '../../components/Alerts';
 
 export const cacheRequest = (data) => async (dispatch) => {
@@ -34,7 +34,7 @@ export const submitRequest = ({
     ...request,
     ...data,
     fromLocation,
-    nid: nid,
+    nid,
     name,
     goDate,
     goTime,

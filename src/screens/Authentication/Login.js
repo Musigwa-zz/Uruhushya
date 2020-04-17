@@ -15,6 +15,7 @@ import inputProps from '../../constants/inputProps';
 
 export class Login extends Component {
   state = { phone: '' };
+
   onChangeText = (target, value) => {
     this.setState({ [target]: value });
   };
@@ -56,12 +57,7 @@ export class Login extends Component {
         <Image
           style={[
             styles.avatar,
-            {
-              borderRadius: null,
-              width: wp('90%'),
-              height: hp('40%'),
-              marginBottom: hp('3%'),
-            },
+            { width: wp('90%'), height: hp('40%'), marginBottom: hp('3%') },
           ]}
           source={login}
         />
@@ -90,7 +86,7 @@ export class Login extends Component {
             mode="contained"
             loading={isFetching}
             disabled={phone.length !== 10}
-            labelStyle={{ color: 'white', fontWeight: 'bold' }}
+            labelStyle={{ color: colors.secondary, fontWeight: 'bold' }}
             onPress={this.onSubmit}>
             ohereza
           </Button>

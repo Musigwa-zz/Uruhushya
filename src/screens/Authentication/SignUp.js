@@ -117,7 +117,7 @@ class SignUp extends Component {
           {
             paddingVertical: hp('3%'),
             paddingHorizontal: wp('6%'),
-            backgroundColor: 'white',
+            backgroundColor: colors.secondary,
           },
         ]}>
         <Icon
@@ -151,8 +151,7 @@ class SignUp extends Component {
         </Text>
         {inputs
           .filter((ip) => ip.id === 'nid' || ip.id === 'name')
-          .map((input, k) => {
-            return (
+          .map((input, k) => (
               <TextInput
                 key={Number(k)}
                 {...input}
@@ -168,8 +167,7 @@ class SignUp extends Component {
                 selectionColor={colors.primary}
                 onChangeText={(text) => this.onChangeText(input.id, text)}
               />
-            );
-          })}
+            ))}
         <View
           style={{
             width: '100%',
@@ -232,7 +230,7 @@ class SignUp extends Component {
           loading={isFetching}
           disabled={!enabled}
           style={{ marginTop: hp('3.5%') }}
-          labelStyle={{ color: 'white', fontWeight: 'bold' }}
+          labelStyle={{ color: colors.secondary, fontWeight: 'bold' }}
           onPress={this.onSubmit}>
           emeza umwirondoro
         </Button>
