@@ -7,7 +7,7 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest --coverage --colors --passWithNoTests --u",
-    "build-android": "cd android && ./gradlew clean && ./gradlew assembleRelease",
+    "build:android": "cd android && ./gradlew clean && ./gradlew assembleRelease",
     "lint": "eslint --ignore-path ./.gitignore . --fix"
   },
   "dependencies": {

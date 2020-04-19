@@ -24,30 +24,30 @@ export const submitRequest = ({
     passData: { request } = {},
     userData: { user } = {},
   } = store.getState();
-  const { name, nid, sector = {}, location } = user;
+  const { name, nid, sector = {}, phone, location } = user;
   const fromLocation = sector.id || location;
   const goDate = moment(depDate).format('L');
-  const goTime = moment(depDate).format('HH:mm');
+  const goTime = moment(depDate).format('HH:mm:ss');
   const come_date = moment(returnDate).format('L');
-  const come_time = moment(returnDate).format('HH:mm');
+  const come_time = moment(returnDate).format('HH:mm:ss');
   const reqBody = {
     ...request,
     ...data,
     fromLocation,
     nid,
     name,
+    phone,
     goDate,
     goTime,
     come_date,
     come_time,
   };
+  console.log('these are data sent:', reqBody);
   let message = 'Gusaba uruhushya ntibyakozwe neza. Ongera ugerageze!';
   try {
-    console.log('Before======:', reqBody);
     dispatch({ type: PASS_FETCHING, payload: reqBody });
-    const { body, status } = await Http.post('permissions/request', reqBody);
-    console.log('After=======:', reqBody, body);
-    if (status === 200) {
+    const { body } = await Http.post('permissions/request', reqBody);
+    if (body.status === true) {
       DropAlert(body.message, 'success');
       dispatch({ type: SEND_REQ_SUCCESS, payload: {} });
     } else {
