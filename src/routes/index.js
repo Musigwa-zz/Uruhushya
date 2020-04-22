@@ -10,24 +10,16 @@ import Splash from '../screens/Loading';
 const Stack = createStackNavigator();
 
 export default () => (
-    <Stack.Navigator
-      screenOptions={{ header: () => null }}
-      initialRouteName={SPLASH}>
-      <Stack.Screen
-        name={SPLASH}
-        component={Splash}
-        options={{ title: null }}
-      />
-      <Stack.Screen
-        name={ONBOARDING}
-        component={Onboarding}
-        options={{ title: null }}
-      />
-      <Stack.Screen
-        name={AUTH}
-        component={AuthRoute}
-        options={{ title: null }}
-      />
-      <Stack.Screen name={APP} component={Home} options={{ title: null }} />
-    </Stack.Navigator>
-  );
+  <Stack.Navigator
+    screenOptions={{ header: () => null }}
+    initialRouteName={ONBOARDING}>
+    <Stack.Screen name={SPLASH} component={Splash} options={{ title: null }} />
+    <Stack.Screen
+      name={ONBOARDING}
+      component={Onboarding}
+      options={{ title: null }}
+    />
+    <Stack.Screen name={AUTH} component={AuthRoute} options={{ title: null }} />
+    <Stack.Screen name={APP} component={Home} options={{ title: null }} />
+  </Stack.Navigator>
+);

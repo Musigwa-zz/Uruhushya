@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text, Image } from 'react-native';
 import Boarding from 'react-native-app-intro-slider';
 import {
   widthPercentageToDP as wp,
@@ -103,17 +103,29 @@ const Onboarding = ({ navigation, theme }) => {
       )}
       data={slides}
       activeDotStyle={{ backgroundColor: colors.primary }}
-      renderDoneButton={() => (
+      showSkipButton
+      renderSkipButton={() => (
         <View
-          style={[styles.buttonCircle, { backgroundColor: colors.primary }]}>
+          style={[
+            styles.buttonCircle,
+            { width: wp('20%'), alignItems: 'flex-start' },
+          ]}>
+          <Text style={styles.subtitle}>Simbuka</Text>
+        </View>
+      )}
+      onSkip={() => navigation.navigate(AUTH)}
+      renderDoneButton={() => (
+        <TouchableOpacity
+          style={[styles.buttonCircle, { backgroundColor: colors.primary }]}
+          activeOpacity={0.8}
+          onPress={() => navigation.navigate(AUTH)}>
           <Icon
             name="md-done-all"
             color={colors.secondary}
             size={24}
             type="ionicon"
-            onPress={() => navigation.navigate(AUTH)}
           />
-        </View>
+        </TouchableOpacity>
       )}
       renderNextButton={() => (
         <View

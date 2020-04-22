@@ -14,7 +14,7 @@ export const checkUser = (phone) => async (dispatch) => {
   const message = 'Gusuzuma imyirondoro ntibigenze neza. Ongera ugerageze!';
   try {
     dispatch({ type: USER_FETCHING });
-    const { body } = await Http.post('users/get', { phone });
+    const { data: body } = await Http.post('users/get', { phone });
     if (body.status === true) {
       const { name, nid_passport: nid, location } = body.data;
       dispatch({
@@ -37,7 +37,7 @@ export const registerUser = (data) => async (dispatch) => {
     const { userData: { user } = {} } = store.getState();
     dispatch({ type: USER_FETCHING });
     const { sector, district, province, ...rest } = data;
-    const { body } = await Http.post('users/create', {
+    const { data: body } = await Http.post('users/create', {
       ...rest,
       phone: data.phone || user.phone,
       location: sector.id,

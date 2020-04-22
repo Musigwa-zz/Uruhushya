@@ -152,22 +152,22 @@ class SignUp extends Component {
         {inputs
           .filter((ip) => ip.id === 'nid' || ip.id === 'name')
           .map((input, k) => (
-              <TextInput
-                key={Number(k)}
-                {...input}
-                defaultValue={
-                  input.id === 'phone' && user.phone ? user.phone : null
-                }
-                mode="outlined"
-                style={{
-                  width: '100%',
-                  height: hp('6%'),
-                  marginTop: hp('1.1%'),
-                }}
-                selectionColor={colors.primary}
-                onChangeText={(text) => this.onChangeText(input.id, text)}
-              />
-            ))}
+            <TextInput
+              key={Number(k)}
+              {...input}
+              defaultValue={
+                input.id === 'phone' && user.phone ? user.phone : null
+              }
+              mode="outlined"
+              style={{
+                width: '100%',
+                height: hp('6%'),
+                marginTop: hp('1.1%'),
+              }}
+              selectionColor={colors.primary}
+              onChangeText={(text) => this.onChangeText(input.id, text)}
+            />
+          ))}
         <View
           style={{
             width: '100%',

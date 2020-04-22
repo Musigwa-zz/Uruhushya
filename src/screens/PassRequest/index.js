@@ -33,11 +33,11 @@ class PassRequest extends Component {
     plateNumber: null,
   };
 
-  async componentDidMount() {
-    const { fetchTransports, fetchReasons } = this.props;
-    fetchTransports();
-    fetchReasons();
-  }
+  // async componentDidMount() {
+  //   const { fetchTransports, fetchReasons } = this.props;
+  //   fetchTransports();
+  //   fetchReasons();
+  // }
 
   onChangeText = (target, value) => {
     this.setState({ [target]: value });
