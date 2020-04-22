@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, Image } from 'react-native';
 import Boarding from 'react-native-app-intro-slider';
+import SplashScreen from 'react-native-splash-screen';
+
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import { withTheme } from 'react-native-paper';
+import { connect } from 'react-redux';
 import Icon from '../components/Icons';
 
 import info from '../assets/images/question.png';
@@ -13,7 +16,7 @@ import hospital from '../assets/images/medicine.png';
 import work from '../assets/images/work.png';
 import shopping from '../assets/images/shopping.png';
 
-import { AUTH } from '../constants/routeNames';
+import { AUTH, APP } from '../constants/routeNames';
 
 const slides = [
   {
@@ -81,65 +84,81 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-const Onboarding = ({ navigation, theme }) => {
-  const { colors } = theme;
-  return (
-    <Boarding
-      keyExtractor={({ key }) => String(key)}
-      renderItem={({ item }) => (
-        <View style={[styles.container, { backgroundColor: colors.secondary }]}>
-          <Image source={item.image} style={styles.avatar} />
+class Onboarding extends Component {
+  componentDidMount() {
+    SplashScreen.hide();
+  }
+  render() {
+    const { navigation, theme, userData } = this.props;
+    const { user } = userData;
+    const { colors } = theme;
+    const nextScreen = user.registered ? APP : AUTH;
+    return (
+      <Boarding
+        keyExtractor={({ key }) => String(key)}
+        renderItem={({ item }) => (
           <View
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Text style={styles.title}>{item.title}</Text>
-            <Text style={[styles.subtitle, { color: colors.disabled }]}>
-              {item.subtitle}
-            </Text>
+            style={[styles.container, { backgroundColor: colors.secondary }]}>
+            <Image source={item.image} style={styles.avatar} />
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text style={styles.title}>{item.title}</Text>
+              <Text style={[styles.subtitle, { color: colors.disabled }]}>
+                {item.subtitle}
+              </Text>
+            </View>
           </View>
-        </View>
-      )}
-      data={slides}
-      activeDotStyle={{ backgroundColor: colors.primary }}
-      showSkipButton
-      renderSkipButton={() => (
-        <View
-          style={[
-            styles.buttonCircle,
-            { width: wp('20%'), alignItems: 'flex-start' },
-          ]}>
-          <Text style={styles.subtitle}>Simbuka</Text>
-        </View>
-      )}
-      onSkip={() => navigation.navigate(AUTH)}
-      renderDoneButton={() => (
-        <TouchableOpacity
-          style={[styles.buttonCircle, { backgroundColor: colors.primary }]}
-          activeOpacity={0.8}
-          onPress={() => navigation.navigate(AUTH)}>
-          <Icon
-            name="md-done-all"
-            color={colors.secondary}
-            size={24}
-            type="ionicon"
-          />
-        </TouchableOpacity>
-      )}
-      renderNextButton={() => (
-        <View
-          style={[styles.buttonCircle, { backgroundColor: colors.primary }]}>
-          <Icon
-            name="md-arrow-round-forward"
-            color={colors.secondary}
-            size={24}
-            type="ionicon"
-          />
-        </View>
-      )}
-    />
-  );
-};
+        )}
+        data={slides}
+        activeDotStyle={{ backgroundColor: colors.primary }}
+        showSkipButton
+        renderSkipButton={() => (
+          <View
+            style={[
+              styles.buttonCircle,
+              { width: wp('20%'), alignItems: 'flex-start' },
+            ]}>
+            <Text style={styles.subtitle}>Simbuka</Text>
+          </View>
+        )}
+        onSkip={() => navigation.navigate(nextScreen)}
+        renderDoneButton={() => (
+          <TouchableOpacity
+            style={[styles.buttonCircle, { backgroundColor: colors.primary }]}
+            activeOpacity={0.8}
+            onPress={() => navigation.navigate(nextScreen)}>
+            <Icon
+              name="md-done-all"
+              color={colors.secondary}
+              size={24}
+              type="ionicon"
+            />
+          </TouchableOpacity>
+        )}
+        renderNextButton={() => (
+          <View
+            style={[styles.buttonCircle, { backgroundColor: colors.primary }]}>
+            <Icon
+              name="md-arrow-round-forward"
+              color={colors.secondary}
+              size={24}
+              type="ionicon"
+            />
+          </View>
+        )}
+      />
+    );
+  }
+}
 
-export default withTheme(Onboarding);
+const mapStateToProps = ({ userData }) => ({ userData });
+
+const mapDispatchToProps = {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withTheme(Onboarding));
