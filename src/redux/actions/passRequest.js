@@ -8,7 +8,6 @@ import {
   GET_TRANS_TYPES,
 } from './types';
 import Http from '../../helpers/http';
-import { store } from '../store';
 import { DropAlert } from '../../components/Alerts';
 
 export const cacheRequest = (data) => async (dispatch) => {
@@ -19,11 +18,8 @@ export const submitRequest = ({
   goDate: depDate,
   come_date: returnDate,
   ...data
-}) => async (dispatch) => {
-  const {
-    passData: { request } = {},
-    userData: { user } = {},
-  } = store.getState();
+}) => async (dispatch, getState) => {
+  const { passData: { request } = {}, userData: { user } = {} } = getState();
   const { name, nid, sector = {}, phone, location } = user;
   const fromLocation = sector.id || location;
   const goDate = moment(depDate).format('D-MM-Y');
@@ -45,29 +41,37 @@ export const submitRequest = ({
       dispatch({ type: FETCHING_FAILED });
     }
   } catch (error) {
+    dispatch({ type: FETCHING_FAILED });
     DropAlert(error.message || message, 'error');
   }
 };
 
-export const getReasons = () => async (dispatch) => {
+export const getReasons = () => async (dispatch, getState) => {
   try {
-    const { data: body, status } = await Http.get('reasons/all');
-    if (status === 200) {
-      dispatch({
-        type: GET_REASONS,
-        payload: body.map((r) => ({ id: r.id, name: r.reason })),
-      });
+    const { reasons } = getState().passData;
+    if (reasons.length === 0) {
+      const { data: body, status } = await Http.get('reasons/all');
+      if (status === 200) {
+        dispatch({
+          type: GET_REASONS,
+          payload: body.map((r) => ({ id: r.id, name: r.reason })),
+        });
+      }
     }
   } catch (error) {
     dispatch({ type: FETCHING_FAILED });
+    DropAlert(error.message, 'error');
   }
 };
 
-export const getTransports = () => async (dispatch) => {
+export const getTransports = () => async (dispatch, getState) => {
   try {
+    const { transportTypes } = getState().passData;
     const { data: body, status } = await Http.get('transportTypes/all');
-    if (status === 200) {
-      dispatch({ type: GET_TRANS_TYPES, payload: body });
+    if (transportTypes.length === 0) {
+      if (status === 200) {
+        dispatch({ type: GET_TRANS_TYPES, payload: body });
+      }
     }
   } catch (error) {
     dispatch({ type: FETCHING_FAILED });

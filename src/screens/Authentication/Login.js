@@ -80,7 +80,7 @@ class Login extends Component {
           <Button
             mode="contained"
             loading={isFetching}
-            disabled={phone.length !== 10}
+            disabled={phone.length !== 10 || isFetching}
             labelStyle={{ color: colors.secondary, fontWeight: 'bold' }}
             onPress={this.onSubmit}>
             ohereza

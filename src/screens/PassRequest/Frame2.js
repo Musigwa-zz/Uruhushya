@@ -177,7 +177,7 @@ class PassRequest extends Component {
         <Button
           mode="contained"
           loading={isFetching}
-          disabled={!(goDate && come_date && description)}
+          disabled={!(goDate && come_date && description) || isFetching}
           style={{ marginTop: hp('3.5%') }}
           labelStyle={{ color: colors.secondary, fontWeight: 'bold' }}
           onPress={this.onSubmit}>
