@@ -225,7 +225,7 @@ class SignUp extends Component {
         <Button
           mode="contained"
           loading={isFetching}
-          disabled={!enabled}
+          disabled={!enabled || isFetching}
           style={{ marginTop: hp('3.5%') }}
           labelStyle={{ color: colors.secondary, fontWeight: 'bold' }}
           onPress={this.onSubmit}>

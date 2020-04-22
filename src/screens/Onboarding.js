@@ -111,16 +111,6 @@ class Onboarding extends Component {
         data={slides}
         activeDotStyle={{ backgroundColor: colors.primary }}
         showSkipButton
-        renderSkipButton={() => (
-          <View
-            style={[
-              styles.buttonCircle,
-              { width: wp('20%'), alignItems: 'flex-start' },
-            ]}>
-            <Text style={styles.subtitle}>Simbuka</Text>
-          </View>
-        )}
-        onSkip={() => navigation.navigate(nextScreen)}
         renderDoneButton={() => (
           <TouchableOpacity
             style={[styles.buttonCircle, { backgroundColor: colors.primary }]}

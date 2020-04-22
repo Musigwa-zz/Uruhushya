@@ -10,7 +10,6 @@ import {
 const initialState = {
   isFetching: false,
   request: {},
-  message: '',
   transportTypes: [],
   reasons: [],
 };

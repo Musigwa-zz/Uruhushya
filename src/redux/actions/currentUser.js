@@ -31,12 +31,12 @@ export const checkUser = (phone) => async (dispatch) => {
   }
 };
 
-export const registerUser = (data) => async (dispatch) => {
+export const registerUser = (data) => async (dispatch, getState) => {
   const message = 'Kwiyandikisha ntibigenze neza. Ongera ugerageze!';
   try {
-    const { userData: { user } = {} } = store.getState();
+    const { userData: { user } = {} } = getState();
     dispatch({ type: USER_FETCHING });
-    const { sector, district, province, ...rest } = data;
+    const { sector, district: _, province: __, ...rest } = data;
     const { data: body } = await Http.post('users/create', {
       ...rest,
       phone: data.phone || user.phone,
