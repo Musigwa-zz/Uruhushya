@@ -127,9 +127,6 @@ class SignUp extends Component {
           color={colors.primary}
           style={{ marginBottom: hp('3%') }}
         />
-        {isFetching === false &&
-          user.registered === true &&
-          navigation.navigate(APP)}
         <Text
           style={{
             fontWeight: 'bold',

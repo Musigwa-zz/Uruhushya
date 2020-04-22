@@ -15,8 +15,7 @@ import info from '../assets/images/question.png';
 import hospital from '../assets/images/medicine.png';
 import work from '../assets/images/work.png';
 import shopping from '../assets/images/shopping.png';
-
-import { AUTH, APP } from '../constants/routeNames';
+import { SIGN_UP, LOGIN } from '../constants/routeNames';
 
 const slides = [
   {
@@ -85,14 +84,11 @@ const styles = StyleSheet.create({
   },
 });
 class Onboarding extends Component {
-  componentDidMount() {
-    SplashScreen.hide();
-  }
   render() {
     const { navigation, theme, userData } = this.props;
     const { user } = userData;
     const { colors } = theme;
-    const nextScreen = user.registered ? APP : AUTH;
+    const nextScreen = user.phone ? SIGN_UP : LOGIN;
     return (
       <Boarding
         keyExtractor={({ key }) => String(key)}

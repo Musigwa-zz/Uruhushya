@@ -13,7 +13,7 @@ import { checkUser } from '../../redux/actions/currentUser';
 import login from '../../assets/images/start.png';
 import inputProps from '../../constants/inputProps';
 
-export class Login extends Component {
+class Login extends Component {
   state = { phone: '' };
 
   onChangeText = (target, value) => {
@@ -39,11 +39,6 @@ export class Login extends Component {
           paddingHorizontal: wp('8%'),
           backgroundColor: colors.secondary,
         }}>
-        {user.registered === true
-          ? navigation.navigate(APP)
-          : didLogin === true
-          ? navigation.navigate(SIGN_UP)
-          : null}
         <Title
           style={{
             fontWeight: 'bold',

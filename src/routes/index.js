@@ -1,25 +1,49 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import { connect } from 'react-redux';
+import SplashScreen from 'react-native-splash-screen';
 
-import AuthRoute from './public';
-import Home from './private';
-import { APP, AUTH, ONBOARDING, SPLASH } from '../constants/routeNames';
+import { APP, ONBOARDING, LOGIN, SIGN_UP } from '../constants/routeNames';
 import Onboarding from '../screens/Onboarding';
-import Splash from '../screens/Loading';
+import Login from '../screens/Authentication/Login';
+import SignUp from '../screens/Authentication/SignUp';
+import App from './private';
 
 const Stack = createStackNavigator();
 
-export default () => (
-  <Stack.Navigator
-    screenOptions={{ header: () => null }}
-    initialRouteName={ONBOARDING}>
-    <Stack.Screen name={SPLASH} component={Splash} options={{ title: null }} />
-    <Stack.Screen
-      name={ONBOARDING}
-      component={Onboarding}
-      options={{ title: null }}
-    />
-    <Stack.Screen name={AUTH} component={AuthRoute} options={{ title: null }} />
-    <Stack.Screen name={APP} component={Home} options={{ title: null }} />
-  </Stack.Navigator>
-);
+const AppNavigator = ({ user }) => {
+  SplashScreen.hide();
+  return (
+    <Stack.Navigator
+      screenOptions={{ header: () => null }}
+      initialRouteName={ONBOARDING}>
+      {user.registered ? (
+        <Stack.Screen name={APP} component={App} options={{ title: null }} />
+      ) : user.phone ? (
+        <Stack.Screen
+          name={SIGN_UP}
+          component={SignUp}
+          options={{ headerShown: false }}
+        />
+      ) : (
+        <>
+          <Stack.Screen
+            name={ONBOARDING}
+            component={Onboarding}
+            options={{ title: null }}
+          />
+          <Stack.Screen
+            name={LOGIN}
+            component={Login}
+            options={{ headerShown: false }}
+          />
+        </>
+      )}
+    </Stack.Navigator>
+  );
+};
+
+const mapStateToProps = ({ userData }) => ({ user: userData.user });
+
+export default connect(mapStateToProps, {})(AppNavigator);

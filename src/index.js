@@ -10,12 +10,11 @@ import { store, persistor } from './redux/store';
 import AppContainer from './routes';
 import themes from './assets/themes';
 import { setAlertRef } from './components/Alerts';
-import Splash from './components/Containers/splash';
 
 YellowBox.ignoreWarnings(['Require cycle:', 'Animated:']);
 
 export default () => (
-  <Provider loading={<Splash />} store={store}>
+  <Provider store={store}>
     <PersistGate persistor={persistor}>
       <PaperProvider theme={themes}>
         <NavigationContainer>
