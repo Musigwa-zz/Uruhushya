@@ -7,7 +7,6 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-import { SIGN_UP, APP } from '../../constants/routeNames';
 import styles from '../../styles';
 import { checkUser } from '../../redux/actions/currentUser';
 import login from '../../assets/images/start.png';
@@ -27,10 +26,10 @@ class Login extends Component {
   };
 
   render() {
-    const { theme, userData, navigation } = this.props;
+    const { theme, userData } = this.props;
     const { phone } = this.state;
     const { colors } = theme;
-    const { user, isFetching, didLogin } = userData;
+    const { isFetching } = userData;
     return (
       <View
         style={{

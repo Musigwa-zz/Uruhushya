@@ -12,6 +12,7 @@ import {
 import styles from '../../styles';
 import direction from '../../assets/images/direction.png';
 import { submitRequest } from '../../redux/actions/passRequest';
+import { HOME_SCREEN } from '../../constants/routeNames';
 
 class PassRequest extends Component {
   state = {
@@ -66,12 +67,12 @@ class PassRequest extends Component {
   };
 
   render() {
-    const { theme, passData } = this.props;
-    const { isFetching } = passData;
+    const { theme, passData, navigation } = this.props;
+    const { isFetching, backHome } = passData;
     const { goDate, come_date, description } = this.state;
     const { show, height, mode, date } = this.state;
     const { colors } = theme;
-
+    if (backHome === true) navigation.navigate(HOME_SCREEN);
     return (
       <View
         style={{
@@ -155,7 +156,6 @@ class PassRequest extends Component {
         )}
         <Input
           placeholder="Ubusobanuro burambuye"
-          autoCapitalize="words"
           style={{
             width: '100%',
             marginTop: hp('1.3%'),

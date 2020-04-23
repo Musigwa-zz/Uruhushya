@@ -23,27 +23,27 @@ const getIconType = (type) => {
       return Fontisto;
     case 'zocial':
       return ZocialIcon;
-    case 'octicon':
+    case 'octIcon':
       return OcticonIcon;
     case 'material':
       return MaterialIcon;
-    case 'material-community':
+    case 'materialCommunity':
       return MaterialCommunityIcon;
-    case 'ionicon':
+    case 'ionIcon':
       return Ionicon;
     case 'foundation':
       return FoundationIcon;
-    case 'evilicon':
+    case 'evilIcon':
       return EvilIcon;
     case 'entypo':
       return EntypoIcon;
-    case 'font-awesome':
+    case 'fontAwesome':
       return FAIcon;
-    case 'font-awesome5':
+    case 'fontAwesome5':
       return FAIcon5;
-    case 'simple-line-icon':
+    case 'simpleLineIcon':
       return SimpleLineIcon;
-    case 'ant-design':
+    case 'antDesign':
       return AntDesign;
     case 'feather':
       return Feather;

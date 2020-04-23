@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { Alert } from 'react-native';
 import {
   FETCHING_FAILED,
   PASS_FETCHING,
@@ -33,8 +34,17 @@ export const submitRequest = ({
     dispatch({ type: PASS_FETCHING, payload: reqBody });
     const { data: body } = await Http.post('permissions/request', reqBody);
     if (body.status === true) {
-      DropAlert(body.message, 'success');
-      dispatch({ type: SEND_REQ_SUCCESS, payload: {} });
+      let backHome = false;
+      Alert.alert(
+        body.message,
+        "Ubusabe bwa bwakiriwe, burimo kwigwaho n'ababifite mu nshingano. Muraza kwakira ubutumwa bugufi burimo igisubizo mu gihe gitoya.\n\nUrashaka urundi ruhushya?",
+        [
+          { text: 'oya' },
+          {},
+          { text: 'yego', onPress: () => (backHome = true) },
+        ],
+      );
+      dispatch({ type: SEND_REQ_SUCCESS, payload: { request: {}, backHome } });
     } else {
       message = body.message && body.message;
       DropAlert(message, 'warn');

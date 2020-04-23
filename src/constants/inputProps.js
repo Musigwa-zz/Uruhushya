@@ -13,7 +13,7 @@ export default [
     id: 'nid',
     autoCompleteType: 'cc-number',
     autoCorrect: false,
-    keyboardType: 'phone-pad',
+    keyboardType: 'name-phone-pad',
   },
   {
     label: 'Nomero ya telephone',

@@ -122,7 +122,7 @@ class SignUp extends Component {
         ]}>
         <Icon
           name="adduser"
-          type="ant-design"
+          type="antDesign"
           size={hp('8%')}
           color={colors.primary}
           style={{ marginBottom: hp('3%') }}
@@ -218,6 +218,7 @@ class SignUp extends Component {
               width: sectors.length !== 0 ? '47%' : '100%',
               height: hp('6%'),
             }}
+            autoCompleteType="off"
             selectionColor={colors.primary}
             onChangeText={(text) => this.onChangeText('phone', text)}
           />

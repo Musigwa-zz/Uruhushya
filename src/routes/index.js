@@ -28,11 +28,11 @@ const AppNavigator = ({ user }) => {
         />
       ) : (
         <>
-          <Stack.Screen
+          {/* <Stack.Screen
             name={ONBOARDING}
             component={Onboarding}
             options={{ title: null }}
-          />
+          /> */}
           <Stack.Screen
             name={LOGIN}
             component={Login}

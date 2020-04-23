@@ -33,12 +33,6 @@ class PassRequest extends Component {
     plateNumber: null,
   };
 
-  // async componentDidMount() {
-  //   const { fetchTransports, fetchReasons } = this.props;
-  //   fetchTransports();
-  //   fetchReasons();
-  // }
-
   onChangeText = (target, value) => {
     this.setState({ [target]: value });
   };
@@ -79,7 +73,6 @@ class PassRequest extends Component {
         <TextInput
           label="Aho ugiye"
           mode="outlined"
-          autoCapitalize="words"
           style={{ width: '100%', height: hp('6%'), marginTop: hp('1.5%') }}
           selectionColor={colors.primary}
           onChangeText={(text) => this.onChangeText('placeName', text)}
@@ -124,7 +117,7 @@ class PassRequest extends Component {
         <TextInput
           label="Pulaki y'ikiyanbiziga"
           mode="outlined"
-          autoCapitalize="words"
+          autoCapitalize="characters"
           style={{ width: '100%', height: hp('6%') }}
           selectionColor={colors.primary}
           onChangeText={(text) => this.onChangeText('plateNumber', text)}
