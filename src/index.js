@@ -10,6 +10,7 @@ import { store, persistor } from './redux/store';
 import AppContainer from './routes';
 import themes from './assets/themes';
 import { setAlertRef } from './components/Alerts';
+import Icon from './components/Icons';
 
 YellowBox.ignoreWarnings(['Require cycle:', 'Animated:']);
 
@@ -23,14 +24,26 @@ export default () => (
         <DropdownAlert
           messageStyle={{
             textAlign: 'center',
-            fontSize: 14,
-            paddingVertical: 5,
+            fontSize: 18,
+            fontWeight: 'bold',
+            lineHeight: 24,
             color: themes.colors.secondary,
           }}
-          renderTitle={() => null}
+          renderCancel={() => (
+            <Icon
+              style={{ alignSelf: 'center' }}
+              name="close"
+              color={themes.colors.secondary}
+              size={24}
+              type="antDesign"
+            />
+          )}
+          tapToCloseEnabled
+          showCancel
+          cancelBtnImageStyle={{ alignSelf: 'flex-start' }}
           ref={(ref) => setAlertRef(ref)}
-          updateStatusBar={false}
-          closeInterval={3000}
+          updateStatusBar
+          closeInterval={20000}
         />
       </PaperProvider>
     </PersistGate>

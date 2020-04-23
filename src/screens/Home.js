@@ -18,13 +18,13 @@ const menu = [
     color: (opacity = 1) => `rgba(156, 201, 46, ${opacity})`,
     title: 'Umwirondoro wawe',
     route: null,
-    iconProps: { name: 'user-cog', type: 'font-awesome5' },
+    iconProps: { name: 'user-cog', type: 'fontAwesome5' },
   },
   {
     color: (opacity = 1) => `rgba(24, 64, 133, ${opacity})`,
     title: 'Saba uruhushya',
     route: PASS_REQUEST,
-    iconProps: { name: 'send-o', type: 'font-awesome' },
+    iconProps: { name: 'send-o', type: 'fontAwesome' },
   },
   {
     color: (opacity = 1) => `rgba(201, 109, 4, ${opacity})`,

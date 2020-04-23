@@ -9,6 +9,7 @@ import {
 
 const initialState = {
   isFetching: false,
+  backHome: false,
   request: {},
   transportTypes: [],
   reasons: [],
@@ -21,7 +22,7 @@ export default (state = initialState, { type, payload = {} }) => {
     case PASS_FETCHING:
       return { ...state, request: payload, isFetching: true };
     case SEND_REQ_SUCCESS:
-      return { ...state, request: payload, isFetching: false };
+      return { ...state, ...payload, isFetching: false };
     case GET_REASONS:
       return { ...state, reasons: payload, isFetching: false };
     case GET_TRANS_TYPES:

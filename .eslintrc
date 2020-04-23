@@ -23,6 +23,7 @@
   "plugins": ["react", "prettier"],
   "rules": {
     "no-use-before-define": "off",
+    "react/state-in-constructor": ["off", "never"],
     "react/prop-types": 2,
     "react/forbid-prop-types": [
       2,

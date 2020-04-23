@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, Image } from 'react-native';
 import Boarding from 'react-native-app-intro-slider';
-import SplashScreen from 'react-native-splash-screen';
 
 import {
   widthPercentageToDP as wp,
@@ -120,7 +119,7 @@ class Onboarding extends Component {
               name="md-done-all"
               color={colors.secondary}
               size={24}
-              type="ionicon"
+              type="ionIcon"
             />
           </TouchableOpacity>
         )}
@@ -131,7 +130,7 @@ class Onboarding extends Component {
               name="md-arrow-round-forward"
               color={colors.secondary}
               size={24}
-              type="ionicon"
+              type="ionIcon"
             />
           </View>
         )}
