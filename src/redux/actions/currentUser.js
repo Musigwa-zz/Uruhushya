@@ -7,7 +7,6 @@ import {
   LOGIN_FLAG,
 } from './types';
 import Http from '../../helpers/http';
-import { store } from '../store';
 import { DropAlert } from '../../components/Alerts';
 
 export const checkUser = (phone) => async (dispatch) => {
