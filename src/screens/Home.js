@@ -10,26 +10,26 @@ import {
 import style from '../styles';
 
 import Icon from '../components/Icons';
-import { PASS_REQUEST } from '../constants/routeNames';
+import { REQUEST, INFO, PROFILE } from '../constants/routeNames';
 import { getReasons, getTransports } from '../redux/actions/passRequest';
 
 const menu = [
   {
     color: (opacity = 1) => `rgba(156, 201, 46, ${opacity})`,
     title: 'Umwirondoro wawe',
-    route: null,
+    route: PROFILE,
     iconProps: { name: 'user-cog', type: 'fontAwesome5' },
   },
   {
     color: (opacity = 1) => `rgba(24, 64, 133, ${opacity})`,
     title: 'Saba uruhushya',
-    route: PASS_REQUEST,
+    route: REQUEST,
     iconProps: { name: 'send-o', type: 'fontAwesome' },
   },
   {
     color: (opacity = 1) => `rgba(201, 109, 4, ${opacity})`,
     title: 'Irinde korona virusi',
-    route: null,
+    route: INFO,
     iconProps: { name: 'info', type: 'entypo' },
   },
 ];

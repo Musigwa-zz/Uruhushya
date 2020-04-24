@@ -40,7 +40,6 @@ export default () => (
           )}
           tapToCloseEnabled
           showCancel
-          cancelBtnImageStyle={{ alignSelf: 'flex-start' }}
           ref={(ref) => setAlertRef(ref)}
           updateStatusBar
           closeInterval={20000}

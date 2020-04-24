@@ -3,30 +3,23 @@
  */
 export const APP = 'APP';
 export const AUTH = 'AUTH';
-export const SPLASH = 'SPLASH';
 
 /**
- * @description Onboarding slides screen
+ * @description Auth routes
  */
 export const ONBOARDING = 'ONBOARDING';
-
-/**
- * @description Authentication routes
- */
 export const LOGIN = 'LOGIN';
-export const VERIFICATION = 'VERIFICATION';
 export const SIGN_UP = 'SIGN_UP';
 
 /**
- * @description Profile routes
+ * @description App routes
  */
-export const SAVE_PROFILE = 'SAVE_PROFILE';
-export const EDIT_PROFILE = 'EDIT_PROFILE';
+export const HOME = 'HOME';
+export const INFO = 'INFO';
+export const PROFILE = 'PROFILE';
 
 /**
  * @description Pass request routes
  */
-export const PASS_REQUEST = 'PASS_REQUEST';
+export const REQUEST = 'REQUEST';
 export const PASS_FRAME2 = 'PASS_FRAME2';
-export const PASS_REQUEST_ROUTE = 'PASS_REQUEST_ROUTE';
-export const HOME_SCREEN = 'HOME_SCREEN';

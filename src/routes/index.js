@@ -15,9 +15,7 @@ const Stack = createStackNavigator();
 const AppNavigator = ({ user }) => {
   SplashScreen.hide();
   return (
-    <Stack.Navigator
-      screenOptions={{ header: () => null }}
-      initialRouteName={ONBOARDING}>
+    <Stack.Navigator screenOptions={{ header: () => null }}>
       {user.registered ? (
         <Stack.Screen name={APP} component={App} options={{ title: null }} />
       ) : user.phone ? (

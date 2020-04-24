@@ -12,7 +12,7 @@ import {
 import styles from '../../styles';
 import direction from '../../assets/images/direction.png';
 import { submitRequest } from '../../redux/actions/passRequest';
-import { HOME_SCREEN } from '../../constants/routeNames';
+import { HOME } from '../../constants/routeNames';
 
 class PassRequest extends Component {
   state = {
@@ -72,7 +72,7 @@ class PassRequest extends Component {
     const { goDate, come_date, description } = this.state;
     const { show, height, mode, date } = this.state;
     const { colors } = theme;
-    if (backHome === true) navigation.navigate(HOME_SCREEN);
+    if (backHome === true) navigation.navigate(HOME);
     return (
       <View
         style={{

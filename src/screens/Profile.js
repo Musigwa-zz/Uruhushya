@@ -1,25 +1,30 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, TextInput } from 'react-native';
 import { connect } from 'react-redux';
-import { Text, withTheme, TextInput, Button } from 'react-native-paper';
+import {
+  Text,
+  withTheme,
+  Button,
+  TextInput as Input,
+} from 'react-native-paper';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-import inputs from '../../constants/inputProps';
-import styles from '../../styles';
-import Icon from '../../components/Icons';
+import inputs from '../constants/inputProps';
+import styles from '../styles';
+import Icon from '../components/Icons';
 import {
   getProvinces,
   getDistricts,
   getSectors,
-} from '../../redux/actions/fetchLocations';
-import { registerUser } from '../../redux/actions/currentUser';
+} from '../redux/actions/fetchLocations';
+import { registerUser } from '../redux/actions/currentUser';
 
-import Select from '../../components/Inputs/Select';
+import Select from '../components/Inputs/Select';
 
-class SignUp extends Component {
+class Profile extends Component {
   state = {
     userInfo: {
       province: {},
@@ -29,50 +34,6 @@ class SignUp extends Component {
       phone: '',
       nid: null,
     },
-    loading: false,
-  };
-
-  async componentDidMount() {
-    const { fetchProvinces } = this.props;
-    await fetchProvinces();
-  }
-
-  confirmProvince = async (provinceId) => {
-    const { fetchDistricts, locations } = this.props;
-    const { userInfo } = this.state;
-    const { provinces = [] } = locations;
-    this.setState({
-      userInfo: {
-        ...userInfo,
-        province: provinces.find((p) => p.id === provinceId),
-      },
-    });
-    await fetchDistricts(provinceId);
-  };
-
-  confirmDistrict = async (districtId) => {
-    const { fetchSectors, locations } = this.props;
-    const { userInfo } = this.state;
-    const { districts = [] } = locations;
-    this.setState({
-      userInfo: {
-        ...userInfo,
-        district: districts.find((d) => d.id === districtId),
-      },
-    });
-    await fetchSectors(districtId);
-  };
-
-  confirmSector = async (sectorId) => {
-    const { locations } = this.props;
-    const { userInfo } = this.state;
-    const { sectors = [] } = locations;
-    this.setState({
-      userInfo: {
-        ...userInfo,
-        sector: sectors.find((s) => s.id === sectorId),
-      },
-    });
   };
 
   onChangeText = (target, value) => {
@@ -87,7 +48,7 @@ class SignUp extends Component {
   };
 
   render() {
-    const { theme, locations, userData, navigation } = this.props;
+    const { theme, locations, userData } = this.props;
     const { user, isFetching } = userData;
     let { provinces = [], districts = [], sectors = [] } = locations;
     const { colors } = theme;
@@ -120,49 +81,54 @@ class SignUp extends Component {
           },
         ]}>
         <Icon
-          name="adduser"
-          type="antDesign"
-          size={hp('8%')}
-          color={colors.primary}
+          name="account-edit"
+          type="materialCommunity"
+          size={hp('9%')}
+          color={colors.disabled}
           style={{ marginBottom: hp('3%') }}
         />
         <Text
           style={{
             fontWeight: 'bold',
+            textAlign: 'center',
             fontSize: hp('3.1%'),
-            marginBottom: 5,
-            color: colors.primary,
-          }}>
-          Reka twuzuze imyirondoro yawe!
-        </Text>
-        <Text
-          style={{
+            marginBottom: 40,
             color: colors.disabled,
-            fontWeight: 'bold',
-            lineHeight: hp('2.5%'),
-            marginBottom: hp('2%'),
           }}>
-          Gutanga umwirondoro wuzuye bizagufasha gusaba no kubona uruhushya
-          rw'ingendo mu buryo bwihuse
+          Wahindura imyirondoro yawe!
         </Text>
         {inputs
           .filter((ip) => ip.id === 'nid' || ip.id === 'name')
           .map((input, k) => (
-            <TextInput
+            <View
               key={Number(k)}
-              {...input}
-              defaultValue={
-                input.id === 'phone' && user.phone ? user.phone : null
-              }
-              mode="outlined"
-              style={{
-                width: '100%',
-                height: hp('6%'),
-                marginTop: hp('1.1%'),
-              }}
-              selectionColor={colors.primary}
-              onChangeText={(text) => this.onChangeText(input.id, text)}
-            />
+              style={[
+                styles.inputWrapper,
+                {
+                  borderColor: colors.disabled,
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  paddingHorizontal: 12,
+                },
+              ]}>
+              <Icon
+                type="fontisto"
+                name={input.id === 'nid' ? 'passport-alt' : 'person'}
+                size={20}
+                style={{ marginRight: 8 }}
+              />
+              <TextInput
+                key={Number(k)}
+                style={{ color: 'blue' }}
+                {...input}
+                placeholder={input.label}
+                defaultValue={
+                  input.id === 'phone' && user.phone ? user.phone : null
+                }
+                selectionColor={colors.primary}
+                onChangeText={(text) => this.onChangeText(input.id, text)}
+              />
+            </View>
           ))}
         <View
           style={{
@@ -197,7 +163,7 @@ class SignUp extends Component {
             width: '100%',
             justifyContent: 'space-between',
             flexDirection: 'row',
-            marginTop: hp('2%'),
+            // marginTop: hp('2%'),
           }}>
           {sectors.length !== 0 && (
             <Select
@@ -209,7 +175,39 @@ class SignUp extends Component {
               theme={theme}
             />
           )}
-          <TextInput
+          {inputs
+            .filter((ip) => ip.id === 'phone')
+            .map((input, k) => (
+              <View
+                key={Number(k)}
+                style={[
+                  styles.inputWrapper,
+                  {
+                    borderColor: colors.disabled,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 12,
+                  },
+                ]}>
+                <Icon
+                  type="material"
+                  name="phone-in-talk"
+                  size={20}
+                  style={{ marginRight: 8 }}
+                />
+                <TextInput
+                  style={{ color: 'blue' }}
+                  {...input}
+                  placeholder={input.label}
+                  defaultValue={
+                    input.id === 'phone' && user.phone ? user.phone : null
+                  }
+                  selectionColor={colors.primary}
+                  onChangeText={(text) => this.onChangeText(input.id, text)}
+                />
+              </View>
+            ))}
+          {/* <Input
             {...inputs.find((i) => i.id === 'phone')}
             defaultValue={user.phone ? user.phone : null}
             mode="outlined"
@@ -220,7 +218,7 @@ class SignUp extends Component {
             autoCompleteType="off"
             selectionColor={colors.primary}
             onChangeText={(text) => this.onChangeText('phone', text)}
-          />
+          /> */}
         </View>
         <Button
           mode="contained"
@@ -229,7 +227,7 @@ class SignUp extends Component {
           style={{ marginTop: hp('3.5%') }}
           labelStyle={{ color: colors.secondary, fontWeight: 'bold' }}
           onPress={this.onSubmit}>
-          emeza umwirondoro
+          emeza impinduka
         </Button>
       </View>
     );
@@ -245,4 +243,4 @@ const mapDispatchToProps = {
   submitUser: registerUser,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTheme(SignUp));
+export default connect(mapStateToProps, mapDispatchToProps)(withTheme(Profile));
