@@ -132,6 +132,7 @@ class SignUp extends Component {
             fontSize: hp('3.1%'),
             marginBottom: 5,
             color: colors.primary,
+            textAlign: 'center',
           }}>
           Reka twuzuze imyirondoro yawe!
         </Text>
@@ -141,6 +142,7 @@ class SignUp extends Component {
             fontWeight: 'bold',
             lineHeight: hp('2.5%'),
             marginBottom: hp('2%'),
+            textAlign: 'center',
           }}>
           Gutanga umwirondoro wuzuye bizagufasha gusaba no kubona uruhushya
           rw'ingendo mu buryo bwihuse
