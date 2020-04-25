@@ -36,6 +36,44 @@ class Profile extends Component {
     },
   };
 
+  confirmProvince = async (provinceId) => {
+    const { fetchDistricts, locations } = this.props;
+    const { userInfo } = this.state;
+    const { provinces = [] } = locations;
+    this.setState({
+      userInfo: {
+        ...userInfo,
+        province: provinces.find((p) => p.id === provinceId),
+      },
+    });
+    await fetchDistricts(provinceId);
+  };
+
+  confirmDistrict = async (districtId) => {
+    const { fetchSectors, locations } = this.props;
+    const { userInfo } = this.state;
+    const { districts = [] } = locations;
+    this.setState({
+      userInfo: {
+        ...userInfo,
+        district: districts.find((d) => d.id === districtId),
+      },
+    });
+    await fetchSectors(districtId);
+  };
+
+  confirmSector = async (sectorId) => {
+    const { locations } = this.props;
+    const { userInfo } = this.state;
+    const { sectors = [] } = locations;
+    this.setState({
+      userInfo: {
+        ...userInfo,
+        sector: sectors.find((s) => s.id === sectorId),
+      },
+    });
+  };
+
   onChangeText = (target, value) => {
     const { userInfo } = this.state;
     this.setState({ userInfo: { ...userInfo, [target]: value } });
@@ -70,6 +108,7 @@ class Profile extends Component {
       sector.id &&
       district.id &&
       province.id;
+    const phoneProps = inputs.find((i) => i.id === 'phone');
     return (
       <View
         style={[
@@ -92,7 +131,7 @@ class Profile extends Component {
             fontWeight: 'bold',
             textAlign: 'center',
             fontSize: hp('3.1%'),
-            marginBottom: 40,
+            marginBottom: 10,
             color: colors.disabled,
           }}>
           Wahindura imyirondoro yawe!
@@ -115,45 +154,65 @@ class Profile extends Component {
                 type="fontisto"
                 name={input.id === 'nid' ? 'passport-alt' : 'person'}
                 size={20}
+                color={colors.primary}
                 style={{ marginRight: 8 }}
               />
               <TextInput
                 key={Number(k)}
-                style={{ color: 'blue' }}
+                style={{ color: colors.primary, fontWeight: 'bold' }}
                 {...input}
                 placeholder={input.label}
-                defaultValue={
-                  input.id === 'phone' && user.phone ? user.phone : null
-                }
-                selectionColor={colors.primary}
+                defaultValue={user[input.id]}
                 onChangeText={(text) => this.onChangeText(input.id, text)}
               />
             </View>
           ))}
         <View
-          style={{
-            width: '100%',
-            justifyContent: 'space-between',
-            flexDirection: 'row',
-            marginTop: hp('2%'),
-          }}>
-          {provinces.length !== 0 && (
+          style={[
+            styles.inputWrapper,
+            {
+              borderWidth: 0,
+              flexDirection: 'row',
+              marginBottom: hp('3%'),
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            },
+          ]}>
+          <View
+            style={{
+              borderColor: colors.disabled,
+              borderWidth: 0.3,
+              borderRadius: 5,
+              flexDirection: 'row',
+              alignItems: 'center',
+              paddingHorizontal: 12,
+              width: user.location ? '47%' : '100%',
+            }}>
+            <Icon
+              type="material"
+              name="phone-in-talk"
+              size={20}
+              color={colors.primary}
+              style={{ marginRight: 8 }}
+            />
+            <TextInput
+              style={{ color: colors.primary, fontWeight: 'bold' }}
+              {...phoneProps}
+              placeholder={phoneProps.label}
+              defaultValue={user[phoneProps.id]}
+              onChangeText={(text) => this.onChangeText(phoneProps.id, text)}
+            />
+          </View>
+          {user.location && (
             <Select
               title={provinceName}
               popupTitle="Hitamo intara utuyemo"
-              style={{ width: districts.length !== 0 ? '47%' : '100%' }}
+              style={{
+                width: user.location ? '47%' : '100%',
+                height: hp('6%'),
+              }}
               data={provinces}
               onSelect={this.confirmProvince}
-              theme={theme}
-            />
-          )}
-          {districts.length !== 0 && (
-            <Select
-              title={districtName}
-              popupTitle="Hitamo akarere utuyemo"
-              style={{ width: '47%' }}
-              data={districts}
-              onSelect={this.confirmDistrict}
               theme={theme}
             />
           )}
@@ -163,9 +222,18 @@ class Profile extends Component {
             width: '100%',
             justifyContent: 'space-between',
             flexDirection: 'row',
-            // marginTop: hp('2%'),
           }}>
-          {sectors.length !== 0 && (
+          {user.location && (
+            <Select
+              title={districtName}
+              popupTitle="Hitamo akarere utuyemo"
+              style={{ width: '47%' }}
+              data={districts}
+              onSelect={this.confirmDistrict}
+              theme={theme}
+            />
+          )}
+          {user.location && (
             <Select
               title={sectorName}
               popupTitle="Hitamo umurenge utuyemo"
@@ -175,50 +243,6 @@ class Profile extends Component {
               theme={theme}
             />
           )}
-          {inputs
-            .filter((ip) => ip.id === 'phone')
-            .map((input, k) => (
-              <View
-                key={Number(k)}
-                style={[
-                  styles.inputWrapper,
-                  {
-                    borderColor: colors.disabled,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    paddingHorizontal: 12,
-                  },
-                ]}>
-                <Icon
-                  type="material"
-                  name="phone-in-talk"
-                  size={20}
-                  style={{ marginRight: 8 }}
-                />
-                <TextInput
-                  style={{ color: 'blue' }}
-                  {...input}
-                  placeholder={input.label}
-                  defaultValue={
-                    input.id === 'phone' && user.phone ? user.phone : null
-                  }
-                  selectionColor={colors.primary}
-                  onChangeText={(text) => this.onChangeText(input.id, text)}
-                />
-              </View>
-            ))}
-          {/* <Input
-            {...inputs.find((i) => i.id === 'phone')}
-            defaultValue={user.phone ? user.phone : null}
-            mode="outlined"
-            style={{
-              width: sectors.length !== 0 ? '47%' : '100%',
-              height: hp('6%'),
-            }}
-            autoCompleteType="off"
-            selectionColor={colors.primary}
-            onChangeText={(text) => this.onChangeText('phone', text)}
-          /> */}
         </View>
         <Button
           mode="contained"

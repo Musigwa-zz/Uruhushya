@@ -43,7 +43,7 @@ SelectInput.propTypes = {
   searchPlaceHolderText: PropTypes.string,
   theme: PropTypes.objectOf(PropTypes.any).isRequired,
   onSelect: PropTypes.func.isRequired,
-  data: PropTypes.array.isRequired,
+  data: PropTypes.arrayOf(PropTypes.any).isRequired,
   style: PropTypes.objectOf(PropTypes.any),
 };
 SelectInput.defaultProps = {

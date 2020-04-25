@@ -14,17 +14,18 @@ import direction from '../../assets/images/direction.png';
 import { submitRequest } from '../../redux/actions/passRequest';
 import { HOME } from '../../constants/routeNames';
 
+const initialState = {
+  goDate: Date.now(),
+  come_date: Date.now(),
+  description: null,
+  date: Date.now(),
+  mode: 'date',
+  show: false,
+  currentInputDate: null,
+  height: 0,
+};
 class PassRequest extends Component {
-  state = {
-    goDate: Date.now(),
-    come_date: Date.now(),
-    description: null,
-    date: Date.now(),
-    mode: 'date',
-    show: false,
-    currentInputDate: null,
-    height: 0,
-  };
+  state = initialState;
 
   onChangeText = (target, value) => {
     this.setState({ [target]: value });
@@ -67,12 +68,12 @@ class PassRequest extends Component {
   };
 
   render() {
-    const { theme, passData, navigation } = this.props;
-    const { isFetching, backHome } = passData;
+    const { theme, passData } = this.props;
+    const { isFetching, request } = passData;
     const { goDate, come_date, description } = this.state;
     const { show, height, mode, date } = this.state;
     const { colors } = theme;
-    if (backHome === true) navigation.navigate(HOME);
+
     return (
       <View
         style={{
@@ -81,6 +82,7 @@ class PassRequest extends Component {
           paddingHorizontal: wp('8%'),
           backgroundColor: colors.secondary,
         }}>
+        {!request ? this.setState(initialState) : null}
         <Avatar.Image
           size={hp('20%')}
           style={styles.avatar}
@@ -169,6 +171,7 @@ class PassRequest extends Component {
           onContentSizeChange={(event) => {
             this.setState({ height: event.nativeEvent.contentSize.height });
           }}
+          value={description}
           onChangeText={(text) => this.onChangeText('description', text)}
           blurOnSubmit
           returnKeyType="send"
