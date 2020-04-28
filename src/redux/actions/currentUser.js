@@ -13,8 +13,10 @@ export const checkUser = (phone) => async (dispatch) => {
   const message = 'Gusuzuma imyirondoro ntibigenze neza. Ongera ugerageze!';
   try {
     dispatch({ type: USER_FETCHING });
-    const { data } = await Http.post('users/get', { phone });
-    const body = JSON.parse(data.slice(data.indexOf('{')));
+    let { data: body } = await Http.post('users/get', { phone });
+    if (typeof body === 'string') {
+      body = JSON.parse(body.slice(body.indexOf('{')));
+    }
     if (body.status === true) {
       const { name, nid_passport: nid, location } = body.data;
       dispatch({
